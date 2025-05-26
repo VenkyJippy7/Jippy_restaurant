@@ -22,7 +22,7 @@ class OnBoardingController extends GetxController {
     await FireStoreUtils.getOnBoardingList().then((value) {
       onBoardingList.value = value;
     });
-    // onBoardingList.add(OnBoardingModel(id: "",title: "Welcome to Foodie Restaurant",description: "Manage your restaurant orders, reservations, and menu effortlessly all in one place.",image: "assets/images/image_1.png"));
+    // onBoardingList.add(OnBoardingModel(id: "",title: "Welcome to Jippymart Restaurant",description: "Manage your restaurant orders, reservations, and menu effortlessly all in one place.",image: "assets/images/image_1.png"));
     // onBoardingList.add(OnBoardingModel(id: "",title: "Streamline Your Operations",description: "Handle orders efficiently, update your menu in real-time, and keep track of your sales with ease.",image: "assets/images/image_2.png"));
     // onBoardingList.add(OnBoardingModel(id: "",title: "Engage with Your Customers",description: "Create promotions, respond to feedback, and provide a personalized dining experience.",image: "assets/images/image_3.png"));
 

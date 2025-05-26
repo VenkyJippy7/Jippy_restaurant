@@ -59,7 +59,7 @@ class OnBoardingScreen extends StatelessWidget {
                                         height: 72,
                                       ),
                                       Text(
-                                        "Foodie".tr,
+                                        "Jippymart".tr,
                                         style: TextStyle(
                                             color: themeChange.getThem()
                                                 ? AppThemeData.grey50

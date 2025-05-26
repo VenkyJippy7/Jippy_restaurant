@@ -28,7 +28,7 @@ class SplashScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "Welcome to Foodie Restaurant".tr,
+                    "Welcome to Jippymart Restaurant".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: themeChange.getThem()

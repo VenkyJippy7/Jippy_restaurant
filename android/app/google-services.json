@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "509796159048",
-    "firebase_url": "https://jippy-mart-a2bbe-default-rtdb.firebaseio.com",
-    "project_id": "jippy-mart-a2bbe",
-    "storage_bucket": "jippy-mart-a2bbe.firebasestorage.app"
+    "project_number": "592427852800",
+    "firebase_url": "https://jippymart-27c08-default-rtdb.firebaseio.com",
+    "project_id": "jippymart-27c08",
+    "storage_bucket": "jippymart-27c08.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:509796159048:android:880f9b54c90e056fbdd27d",
+        "mobilesdk_app_id": "1:592427852800:android:2b3bdce60d524d02d1a4e5",
         "android_client_info": {
           "package_name": "com.jippymart.customer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "509796159048-6v0gg0gd7ri5vgtu8kpbjbv5n7majqbl.apps.googleusercontent.com",
+          "client_id": "592427852800-kl50sevg036nfplapf4aruogtpoh12lk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.jippymart.customer",
-            "certificate_hash": "676927c75a588acc76f775e964b6ea84794f937e"
+            "certificate_hash": "036d0ea7d35cee20af41ca99b79232f71215e3e0"
           }
         },
         {
-          "client_id": "509796159048-l9lv36s3do1sne4n41kbc0i400j3f6us.apps.googleusercontent.com",
+          "client_id": "592427852800-g14719r8ejten85kqpasqmpqnhetce2q.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBK-WJX6l4wUeiHt-H8kZOVpb4aSbz-Fgg"
+          "current_key": "AIzaSyBRdk2BoUowc2FgvAwI0oDF_0fhbazoTQs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "509796159048-l9lv36s3do1sne4n41kbc0i400j3f6us.apps.googleusercontent.com",
+              "client_id": "592427852800-g14719r8ejten85kqpasqmpqnhetce2q.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -45,72 +45,35 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:509796159048:android:32d30cb42d235957bdd27d",
-        "android_client_info": {
-          "package_name": "com.jippymart.driver"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "509796159048-nda6nn4n349abmcl86nuj9v5os9pbnbe.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.jippymart.driver",
-            "certificate_hash": "676927c75a588acc76f775e964b6ea84794f937e"
-          }
-        },
-        {
-          "client_id": "509796159048-l9lv36s3do1sne4n41kbc0i400j3f6us.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBK-WJX6l4wUeiHt-H8kZOVpb4aSbz-Fgg"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "509796159048-l9lv36s3do1sne4n41kbc0i400j3f6us.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:509796159048:android:f56122855cb613a2bdd27d",
+        "mobilesdk_app_id": "1:592427852800:android:406ac6af6733caddd1a4e5",
         "android_client_info": {
           "package_name": "com.jippymart.restaurant"
         }
       },
       "oauth_client": [
         {
-          "client_id": "509796159048-4jr23pto96qv9iecl6se2vb9s1qk1l8u.apps.googleusercontent.com",
+          "client_id": "592427852800-3iisvvnkpc7seib62hjrpkqmrg6cqbqm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.jippymart.restaurant",
-            "certificate_hash": "5400978f5a9af1f0a5d36f2c27ab1ed67d3735e1"
+            "certificate_hash": "a0423495c6672877a75844b37012ae1961e77cc1"
           }
         },
         {
-          "client_id": "509796159048-l9lv36s3do1sne4n41kbc0i400j3f6us.apps.googleusercontent.com",
+          "client_id": "592427852800-g14719r8ejten85kqpasqmpqnhetce2q.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBK-WJX6l4wUeiHt-H8kZOVpb4aSbz-Fgg"
+          "current_key": "AIzaSyBRdk2BoUowc2FgvAwI0oDF_0fhbazoTQs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "509796159048-l9lv36s3do1sne4n41kbc0i400j3f6us.apps.googleusercontent.com",
+              "client_id": "592427852800-g14719r8ejten85kqpasqmpqnhetce2q.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

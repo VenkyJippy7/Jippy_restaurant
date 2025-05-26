@@ -139,28 +139,235 @@ class ProfileScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          if (Constant.isSubscriptionModelApplied == true ||
-                              Constant.adminCommission?.isEnabled == true)
-                            Visibility(
-                              visible: controller.userModel.value
-                                      .subscriptionPlanId?.isNotEmpty ==
-                                  true,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 10),
-                                child: SubscriptionPlanWidget(
-                                  onClick: () {
-                                    Get.to(const SubscriptionPlanScreen(),
-                                            arguments: {'isProfile': true})
-                                        ?.then((value) {
-                                      if (value == true) {
-                                        controller.getUserProfile();
-                                      }
-                                    });
-                                  },
-                                  userModel: controller.userModel.value,
-                                ),
+                          // Subscription Management Section
+                          Visibility(
+                            visible: false,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: SubscriptionPlanWidget(
+                                onClick: () {
+                                  Get.to(const SubscriptionPlanScreen(), arguments: {'isProfile': true})?.then((value) {
+                                    if (value == true) {
+                                      controller.getUserProfile();
+                                    }
+                                  });
+                                },
+                                userModel: controller.userModel.value,
                               ),
                             ),
+                          ),
+                          // Add Story Section
+                          Visibility(
+                            visible: false,
+                            child: cardDecoration(
+                              themeChange,
+                              controller,
+                              Container(
+                                width: 44,
+                                height: 44,
+                                decoration: ShapeDecoration(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.secondary600
+                                      : AppThemeData.secondary50,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(120),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: SvgPicture.asset("assets/icons/ic_story.svg"),
+                                ),
+                              ),
+                              "Add Story",
+                              () {
+                                Get.to(const AddStoryScreen());
+                              },
+                            ),
+                          ),
+                          // Advertisement Section
+                          Visibility(
+                            visible: false,
+                            child: cardDecoration(
+                              themeChange,
+                              controller,
+                              Container(
+                                width: 44,
+                                height: 44,
+                                decoration: ShapeDecoration(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.secondary600
+                                      : AppThemeData.secondary50,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(120),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: SvgPicture.asset("assets/icons/ic_advertisement.svg"),
+                                ),
+                              ),
+                              "Advertisement",
+                              () {
+                                Get.to(const AdvertisementListScreen());
+                              },
+                            ),
+                          ),
+                          // Delivery Man Information Section
+                          Visibility(
+                            visible: false,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 20),
+                                Text(
+                                  "Delivery Man Information".tr,
+                                  style: TextStyle(
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.grey400
+                                        : AppThemeData.grey500,
+                                    fontFamily: AppThemeData.semiBold,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Container(
+                                  width: Responsive.width(100, context),
+                                  decoration: ShapeDecoration(
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.grey900
+                                        : AppThemeData.grey50,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12)),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                                    child: Column(children: [
+                                      cardDecoration(
+                                        themeChange,
+                                        controller,
+                                        Container(
+                                          width: 44,
+                                          height: 44,
+                                          decoration: ShapeDecoration(
+                                            color: themeChange.getThem()
+                                                ? AppThemeData.secondary600
+                                                : AppThemeData.goldenrodDark.withAlpha(30),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(120),
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(12),
+                                            child: SvgPicture.asset(
+                                              "assets/icons/ic_manage_delivery_man.svg",
+                                              colorFilter: ColorFilter.mode(AppThemeData.goldenrodDark, BlendMode.srcIn),
+                                            ),
+                                          ),
+                                        ),
+                                        "Manage Delivery Man",
+                                        () {
+                                          Get.to(DriverListScreen());
+                                        },
+                                      )
+                                    ]),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          // Offers & Discounts Section
+                          Visibility(
+                            visible: false,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 20),
+                                Text(
+                                  "Offers & Discounts".tr,
+                                  style: TextStyle(
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.grey400
+                                        : AppThemeData.grey500,
+                                    fontFamily: AppThemeData.semiBold,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Container(
+                                  width: Responsive.width(100, context),
+                                  decoration: ShapeDecoration(
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.grey900
+                                        : AppThemeData.grey50,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12)),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 8),
+                                    child: Column(
+                                      children: [
+                                        cardDecoration(
+                                          themeChange,
+                                          controller,
+                                          Container(
+                                            width: 44,
+                                            height: 44,
+                                            decoration: ShapeDecoration(
+                                              color: themeChange.getThem()
+                                                  ? AppThemeData.success600
+                                                  : AppThemeData.success50,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(120),
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: SvgPicture.asset(
+                                                  "assets/icons/ic_gift_box.svg"),
+                                            ),
+                                          ),
+                                          "Offers",
+                                          () {
+                                            Get.to(const OfferScreen());
+                                          },
+                                        ),
+                                        Constant.specialDiscountOfferEnable == false
+                                            ? const SizedBox()
+                                            : cardDecoration(
+                                                themeChange,
+                                                controller,
+                                                Container(
+                                                  width: 44,
+                                                  height: 44,
+                                                  decoration: ShapeDecoration(
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData.success600
+                                                        : AppThemeData.success50,
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(120),
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(10),
+                                                    child: SvgPicture.asset(
+                                                      "assets/icons/ic_coupon.svg",
+                                                    ),
+                                                  ),
+                                                ),
+                                                "Special Discounts",
+                                                () {
+                                                  Get.to(
+                                                      const SpecialDiscountScreen());
+                                                },
+                                              ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           Text(
                             "Restaurant Information".tr,
                             style: TextStyle(
@@ -188,15 +395,10 @@ class ProfileScreen extends StatelessWidget {
                                   horizontal: 10, vertical: 8),
                               child: Column(
                                 children: [
-                                  (Constant.isRestaurantVerification == true &&
-                                              controller.userModel.value
-                                                      .isDocumentVerify ==
-                                                  false) ||
-                                          (controller.userModel.value
-                                                      .vendorID ==
-                                                  null ||
-                                              controller.userModel.value
-                                                  .vendorID!.isEmpty)
+                                  Constant.isRestaurantVerification == true &&
+                                          controller.userModel.value
+                                                  .isDocumentVerify ==
+                                              false
                                       ? const SizedBox()
                                       : Constant.storyEnable == false
                                           ? const SizedBox()
@@ -222,102 +424,21 @@ class ProfileScreen extends StatelessWidget {
                                                   padding:
                                                       const EdgeInsets.all(10),
                                                   child: SvgPicture.asset(
-                                                      "assets/icons/ic_story.svg"),
-                                                ),
-                                              ),
-                                              "Add Story",
-                                              () {
-                                                Get.to(const AddStoryScreen());
-                                              },
-                                            ),
-                                  Visibility(
-                                      visible:
-                                          Constant.isEnableAdsFeature == true,
-                                      child: (Constant.isRestaurantVerification ==
-                                                      true &&
-                                                  controller.userModel.value
-                                                          .isDocumentVerify ==
-                                                      false) ||
-                                              (controller.userModel.value
-                                                          .vendorID ==
-                                                      null ||
-                                                  controller.userModel.value
-                                                      .vendorID!.isEmpty)
-                                          ? const SizedBox()
-                                          : Constant.storyEnable == false
-                                              ? const SizedBox()
-                                              : cardDecoration(
-                                                  themeChange,
-                                                  controller,
-                                                  Container(
-                                                    width: 44,
-                                                    height: 44,
-                                                    decoration: ShapeDecoration(
-                                                      color:
-                                                          themeChange.getThem()
-                                                              ? AppThemeData
-                                                                  .secondary600
-                                                              : AppThemeData
-                                                                  .secondary50,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(120),
-                                                      ),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              10),
-                                                      child: SvgPicture.asset(
-                                                          "assets/icons/ic_advertisement.svg"),
+                                                      "assets/icons/ic_building_two.svg",
+                                                      colorFilter: ColorFilter.mode(
+                                                          AppThemeData.secondary300,
+                                                          BlendMode.srcIn),
                                                     ),
                                                   ),
-                                                  "Advertisement",
-                                                  () {
-                                                    Get.to(
-                                                        const AdvertisementListScreen());
-                                                  },
-                                                )),
-                                  Constant.isRestaurantVerification == true &&
-                                          controller.userModel.value
-                                                  .isDocumentVerify ==
-                                              false
-                                      ? const SizedBox()
-                                      : cardDecoration(
-                                          themeChange,
-                                          controller,
-                                          Container(
-                                            width: 44,
-                                            height: 44,
-                                            decoration: ShapeDecoration(
-                                              color: themeChange.getThem()
-                                                  ? AppThemeData.secondary600
-                                                  : AppThemeData.secondary50,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(120),
+                                                ),
+                                                "Restaurant Information's",
+                                                () {
+                                                  Get.to(const AddRestaurantScreen())
+                                                      ?.then((v) {
+                                                    controller.getUserProfile();
+                                                  });
+                                                },
                                               ),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(10),
-                                              child: SvgPicture.asset(
-                                                "assets/icons/ic_building_two.svg",
-                                                colorFilter: ColorFilter.mode(
-                                                    AppThemeData.secondary300,
-                                                    BlendMode.srcIn),
-                                              ),
-                                            ),
-                                          ),
-                                          "Restaurant Information's",
-                                          () {
-                                            Get.to(const AddRestaurantScreen())
-                                                ?.then((v) {
-                                              controller.getUserProfile();
-                                            });
-                                          },
-                                        ),
                                   (Constant.isRestaurantVerification == true &&
                                               controller.userModel.value
                                                       .isDocumentVerify ==
@@ -437,437 +558,250 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          if (Constant.isSelfDeliveryFeature == true)
-                            Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text(
-                                    "Delivery Man Information".tr,
-                                    style: TextStyle(
-                                      color: themeChange.getThem()
-                                          ? AppThemeData.grey400
-                                          : AppThemeData.grey500,
-                                      fontFamily: AppThemeData.semiBold,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Container(
-                                      width: Responsive.width(100, context),
-                                      decoration: ShapeDecoration(
-                                        color: themeChange.getThem()
-                                            ? AppThemeData.grey900
-                                            : AppThemeData.grey50,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                      ),
-                                      child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 8),
-                                          child: Column(children: [
-                                            cardDecoration(
-                                              themeChange,
-                                              controller,
-                                              Container(
-                                                width: 44,
-                                                height: 44,
-                                                decoration: ShapeDecoration(
-                                                  color: themeChange.getThem()
-                                                      ? AppThemeData
-                                                          .secondary600
-                                                      : AppThemeData
-                                                          .goldenrodDark
-                                                          .withAlpha(30),
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120),
-                                                  ),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(12),
-                                                  child: SvgPicture.asset(
-                                                    "assets/icons/ic_manage_delivery_man.svg",
-                                                    colorFilter:
-                                                        ColorFilter.mode(
-                                                            AppThemeData
-                                                                .goldenrodDark,
-                                                            BlendMode.srcIn),
-                                                  ),
-                                                ),
-                                              ),
-                                              "Manage Delivery Man",
-                                              () {
-                                                Get.to(DriverListScreen());
-                                              },
-                                            )
-                                          ])))
-                                ]),
                           (Constant.isRestaurantVerification == true &&
                                       controller.userModel.value
                                               .isDocumentVerify ==
                                           false) ||
-                                  (controller.userModel.value.vendorID ==
-                                          null ||
-                                      controller
-                                          .userModel.value.vendorID!.isEmpty) ||
-                                  (controller.userModel.value.subscriptionPlan
-                                          ?.features?.dineIn ==
-                                      false)
-                              ? const SizedBox()
-                              : Constant.isDineInEnable
-                                  ? Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text(
-                                          "Dine-in Information".tr,
-                                          style: TextStyle(
-                                            color: themeChange.getThem()
-                                                ? AppThemeData.grey400
-                                                : AppThemeData.grey500,
-                                            fontFamily: AppThemeData.semiBold,
-                                            fontWeight: FontWeight.w500,
+                                    (controller.userModel.value.vendorID ==
+                                            null ||
+                                        controller
+                                            .userModel.value.vendorID!.isEmpty) ||
+                                    (controller.userModel.value.subscriptionPlan
+                                            ?.features?.dineIn ==
+                                        false)
+                                ? const SizedBox()
+                                : Constant.isDineInEnable
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const SizedBox(
+                                            height: 20,
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Container(
-                                          width: Responsive.width(100, context),
-                                          decoration: ShapeDecoration(
-                                            color: themeChange.getThem()
-                                                ? AppThemeData.grey900
-                                                : AppThemeData.grey50,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(12)),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10, vertical: 8),
-                                            child: Column(
-                                              children: [
-                                                cardDecoration(
-                                                  themeChange,
-                                                  controller,
-                                                  Container(
-                                                    width: 44,
-                                                    height: 44,
-                                                    decoration: ShapeDecoration(
-                                                      color:
-                                                          themeChange.getThem()
-                                                              ? AppThemeData
-                                                                  .primary600
-                                                              : AppThemeData
-                                                                  .primary50,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(120),
-                                                      ),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              10),
-                                                      child: SvgPicture.asset(
-                                                          "assets/icons/ic_knife_fork.svg"),
-                                                    ),
-                                                  ),
-                                                  "Dine in Restaurant",
-                                                  () {
-                                                    Get.to(
-                                                        const DineInCreateScreen());
-                                                  },
-                                                ),
-                                                cardDecoration(
-                                                  themeChange,
-                                                  controller,
-                                                  Container(
-                                                    width: 44,
-                                                    height: 44,
-                                                    decoration: ShapeDecoration(
-                                                      color:
-                                                          themeChange.getThem()
-                                                              ? AppThemeData
-                                                                  .primary600
-                                                              : AppThemeData
-                                                                  .primary50,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(120),
-                                                      ),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              10),
-                                                      child: SvgPicture.asset(
-                                                        "assets/icons/ic_people-unknown.svg",
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  "Dine in Requests",
-                                                  () {
-                                                    DashBoardController
-                                                        dashBoardController =
-                                                        Get.find<
-                                                            DashBoardController>();
-                                                    dashBoardController
-                                                        .selectedIndex
-                                                        .value = 1;
-                                                  },
-                                                ),
-                                              ],
+                                          Text(
+                                            "Dine-in Information".tr,
+                                            style: TextStyle(
+                                              color: themeChange.getThem()
+                                                  ? AppThemeData.grey400
+                                                  : AppThemeData.grey500,
+                                              fontFamily: AppThemeData.semiBold,
+                                              fontWeight: FontWeight.w500,
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    )
-                                  : const SizedBox(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "Subscription Management".tr,
-                                style: TextStyle(
-                                  color: themeChange.getThem()
-                                      ? AppThemeData.grey400
-                                      : AppThemeData.grey500,
-                                  fontFamily: AppThemeData.semiBold,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                width: Responsive.width(100, context),
-                                decoration: ShapeDecoration(
-                                  color: themeChange.getThem()
-                                      ? AppThemeData.grey900
-                                      : AppThemeData.grey50,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12)),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 8),
-                                  child: Column(
-                                    children: [
-                                      (Constant.isSubscriptionModelApplied ==
-                                                  true ||
-                                              Constant.adminCommission
-                                                      ?.isEnabled ==
-                                                  true)
-                                          ? cardDecoration(
-                                              themeChange,
-                                              controller,
-                                              Container(
-                                                width: 44,
-                                                height: 44,
-                                                decoration: ShapeDecoration(
-                                                  color: themeChange.getThem()
-                                                      ? AppThemeData.driverApp50
-                                                          .withAlpha(20)
-                                                      : AppThemeData
-                                                          .driverApp50,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120),
-                                                  ),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(10),
-                                                  child: SvgPicture.asset(
-                                                      "assets/icons/ic_subscription.svg"),
-                                                ),
-                                              ),
-                                              "Subscription Packages",
-                                              () {
-                                                Get.to(
-                                                    const SubscriptionPlanScreen(),
-                                                    arguments: {
-                                                      'isProfile': true
-                                                    })?.then((value) {
-                                                  if (value == true) {
-                                                    controller.getUserProfile();
-                                                  }
-                                                });
-                                              },
-                                            )
-                                          : SizedBox(),
-                                      cardDecoration(
-                                        themeChange,
-                                        controller,
-                                        Container(
-                                          width: 44,
-                                          height: 44,
-                                          decoration: ShapeDecoration(
-                                            color: themeChange.getThem()
-                                                ? AppThemeData.driverApp50
-                                                    .withAlpha(20)
-                                                : AppThemeData.driverApp50,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(120),
-                                            ),
+                                          const SizedBox(
+                                            height: 10,
                                           ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: SvgPicture.asset(
-                                              "assets/icons/ic_history.svg",
+                                          Container(
+                                            width: Responsive.width(100, context),
+                                            decoration: ShapeDecoration(
+                                              color: themeChange.getThem()
+                                                  ? AppThemeData.grey900
+                                                  : AppThemeData.grey50,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12)),
                                             ),
-                                          ),
-                                        ),
-                                        "Subscription History",
-                                        () {
-                                          Get.to(
-                                              const SubscriptionHistoryScreen());
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          (Constant.isRestaurantVerification == true &&
-                                      controller.userModel.value
-                                              .isDocumentVerify ==
-                                          false) ||
-                                  (controller.userModel.value.vendorID ==
-                                          null ||
-                                      controller
-                                          .userModel.value.vendorID!.isEmpty)
-                              ? const SizedBox()
-                              : Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    Text(
-                                      "Offers & Discounts".tr,
-                                      style: TextStyle(
-                                        color: themeChange.getThem()
-                                            ? AppThemeData.grey400
-                                            : AppThemeData.grey500,
-                                        fontFamily: AppThemeData.semiBold,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                      width: Responsive.width(100, context),
-                                      decoration: ShapeDecoration(
-                                        color: themeChange.getThem()
-                                            ? AppThemeData.grey900
-                                            : AppThemeData.grey50,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 8),
-                                        child: Column(
-                                          children: [
-                                            cardDecoration(
-                                              themeChange,
-                                              controller,
-                                              Container(
-                                                width: 44,
-                                                height: 44,
-                                                decoration: ShapeDecoration(
-                                                  color: themeChange.getThem()
-                                                      ? AppThemeData.success600
-                                                      : AppThemeData.success50,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            120),
-                                                  ),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(10),
-                                                  child: SvgPicture.asset(
-                                                      "assets/icons/ic_gift_box.svg"),
-                                                ),
-                                              ),
-                                              "Offers",
-                                              () {
-                                                Get.to(const OfferScreen());
-                                              },
-                                            ),
-                                            Constant.specialDiscountOfferEnable ==
-                                                    false
-                                                ? const SizedBox()
-                                                : cardDecoration(
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 10, vertical: 8),
+                                              child: Column(
+                                                children: [
+                                                  cardDecoration(
                                                     themeChange,
                                                     controller,
                                                     Container(
                                                       width: 44,
                                                       height: 44,
-                                                      decoration:
-                                                          ShapeDecoration(
-                                                        color: themeChange
-                                                                .getThem()
-                                                            ? AppThemeData
-                                                                .success600
-                                                            : AppThemeData
-                                                                .success50,
+                                                      decoration: ShapeDecoration(
+                                                        color:
+                                                            themeChange.getThem()
+                                                                ? AppThemeData
+                                                                    .primary600
+                                                                : AppThemeData
+                                                                    .primary50,
                                                         shape:
                                                             RoundedRectangleBorder(
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(
-                                                                      120),
+                                                                  .circular(120),
                                                         ),
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .all(10),
+                                                            const EdgeInsets.all(
+                                                                10),
                                                         child: SvgPicture.asset(
-                                                          "assets/icons/ic_coupon.svg",
+                                                            "assets/icons/ic_knife_fork.svg"),
+                                                      ),
+                                                    ),
+                                                    "Dine in Restaurant",
+                                                    () {
+                                                      Get.to(
+                                                          const DineInCreateScreen());
+                                                    },
+                                                  ),
+                                                  cardDecoration(
+                                                    themeChange,
+                                                    controller,
+                                                    Container(
+                                                      width: 44,
+                                                      height: 44,
+                                                      decoration: ShapeDecoration(
+                                                        color:
+                                                            themeChange.getThem()
+                                                                ? AppThemeData
+                                                                    .primary600
+                                                                : AppThemeData
+                                                                    .primary50,
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(120),
+                                                        ),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets.all(
+                                                                10),
+                                                        child: SvgPicture.asset(
+                                                          "assets/icons/ic_people-unknown.svg",
                                                         ),
                                                       ),
                                                     ),
-                                                    "Special Discounts",
+                                                    "Dine in Requests",
                                                     () {
-                                                      Get.to(
-                                                          const SpecialDiscountScreen());
+                                                      DashBoardController
+                                                          dashBoardController =
+                                                          Get.find<
+                                                              DashBoardController>();
+                                                      dashBoardController
+                                                          .selectedIndex
+                                                          .value = 1;
                                                     },
                                                   ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : const SizedBox(),
+                          Visibility(
+                            visible: false,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 20,
                                 ),
+                                Text(
+                                  "Subscription Management".tr,
+                                  style: TextStyle(
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.grey400
+                                        : AppThemeData.grey500,
+                                    fontFamily: AppThemeData.semiBold,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  width: Responsive.width(100, context),
+                                  decoration: ShapeDecoration(
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.grey900
+                                        : AppThemeData.grey50,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12)),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 8),
+                                    child: Column(
+                                      children: [
+                                        (Constant.isSubscriptionModelApplied ==
+                                                    true ||
+                                                Constant.adminCommission
+                                                        ?.isEnabled ==
+                                                    true)
+                                            ? cardDecoration(
+                                                themeChange,
+                                                controller,
+                                                Container(
+                                                  width: 44,
+                                                  height: 44,
+                                                  decoration: ShapeDecoration(
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData.driverApp50
+                                                            .withAlpha(20)
+                                                        : AppThemeData
+                                                            .driverApp50,
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              120),
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(10),
+                                                    child: SvgPicture.asset(
+                                                        "assets/icons/ic_subscription.svg"),
+                                                  ),
+                                                ),
+                                                "Subscription Packages",
+                                                () {
+                                                  Get.to(
+                                                      const SubscriptionPlanScreen(),
+                                                      arguments: {
+                                                        'isProfile': true
+                                                      })?.then((value) {
+                                                    if (value == true) {
+                                                      controller.getUserProfile();
+                                                    }
+                                                  });
+                                                },
+                                              )
+                                            : SizedBox(),
+                                        cardDecoration(
+                                          themeChange,
+                                          controller,
+                                          Container(
+                                            width: 44,
+                                            height: 44,
+                                            decoration: ShapeDecoration(
+                                              color: themeChange.getThem()
+                                                  ? AppThemeData.driverApp50
+                                                      .withAlpha(20)
+                                                  : AppThemeData.driverApp50,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(120),
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: SvgPicture.asset(
+                                                "assets/icons/ic_history.svg",
+                                              ),
+                                            ),
+                                          ),
+                                          "Subscription History",
+                                          () {
+                                            Get.to(
+                                                const SubscriptionHistoryScreen());
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           const SizedBox(
                             height: 20,
                           ),
@@ -898,31 +832,34 @@ class ProfileScreen extends StatelessWidget {
                                   horizontal: 10, vertical: 8),
                               child: Column(
                                 children: [
-                                  cardDecoration(
-                                    themeChange,
-                                    controller,
-                                    Container(
-                                      width: 44,
-                                      height: 44,
-                                      decoration: ShapeDecoration(
-                                        color: themeChange.getThem()
-                                            ? AppThemeData.warning600
-                                            : AppThemeData.warning50,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(120),
+                                  // Language Setting Section
+                                  Visibility(
+                                    visible: false,
+                                    child: cardDecoration(
+                                      themeChange,
+                                      controller,
+                                      Container(
+                                        width: 44,
+                                        height: 44,
+                                        decoration: ShapeDecoration(
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.secondary600
+                                              : AppThemeData.secondary50,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(120),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: SvgPicture.asset(
+                                              "assets/icons/ic_language.svg"),
                                         ),
                                       ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: SvgPicture.asset(
-                                            "assets/icons/ic_language.svg"),
-                                      ),
+                                      "Change Language",
+                                      () {
+                                        Get.to(const ChangeLanguageScreen());
+                                      },
                                     ),
-                                    "Change Language",
-                                    () {
-                                      Get.to(const ChangeLanguageScreen());
-                                    },
                                   ),
                                   cardDecoration(
                                     themeChange,
@@ -1007,7 +944,7 @@ class ProfileScreen extends StatelessWidget {
                                     "Share app",
                                     () {
                                       Share.share(
-                                          '${"Check out Foodie, your ultimate food delivery application! \n\nGoogle Play:".tr} ${Constant.googlePlayLink} ${"\n\nApp Store:".tr} ${Constant.appStoreLink}',
+                                          '${"Check out Jippymart, your ultimate food delivery application! \n\nGoogle Play:".tr} ${Constant.googlePlayLink} ${"\n\nApp Store:".tr} ${Constant.appStoreLink}',
                                           subject: 'Look what I made!'.tr);
                                     },
                                   ),

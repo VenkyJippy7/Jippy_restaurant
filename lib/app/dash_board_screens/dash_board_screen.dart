@@ -32,17 +32,6 @@ class DashBoardScreen extends StatelessWidget {
                 controller.canPopNow.value = true;
               }
             },
-            // onPopInvokedWithResult: (didPop, dynamic) {
-            //   final now = DateTime.now();
-            //   if (controller.currentBackPressTime == null || now.difference(controller.currentBackPressTime!) > const Duration(seconds: 2)) {
-            //     controller.currentBackPressTime = now;
-            //     controller.canPopNow.value = false;
-            //     ShowToastDialog.showToast("Double press to exit");
-            //     return;
-            //   } else {
-            //     controller.canPopNow.value = true;
-            //   }
-            // },
             child: Scaffold(
               body: controller.pageList[controller.selectedIndex.value],
               bottomNavigationBar: BottomNavigationBar(

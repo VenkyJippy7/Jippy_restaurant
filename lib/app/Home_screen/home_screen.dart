@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Welcome to Foodie Restaurant".tr,
+                                "Welcome to Jippymart Restaurant".tr,
                                 style: TextStyle(
                                     color: themeChange.getThem()
                                         ? AppThemeData.grey900
@@ -147,9 +147,10 @@ class HomeScreen extends StatelessWidget {
                       ),
                       actions: [
                         Visibility(
-                          visible: controller.userModel.value.subscriptionPlan
-                                  ?.features?.chat !=
-                              false,
+                          // visible: controller.userModel.value.subscriptionPlan
+                          //         ?.features?.chat !=
+                          //     false,
+                          visible: false,
                           child: InkWell(
                             onTap: () async {
                               Get.to(const RestaurantInboxScreen());
@@ -955,9 +956,16 @@ class HomeScreen extends StatelessWidget {
                             orderModel.status = Constant.orderRejected;
                             await FireStoreUtils.updateOrder(orderModel);
 
-                            SendNotification.sendFcmMessage(
+                            if (orderModel.author?.fcmToken != null && orderModel.author!.fcmToken!.isNotEmpty) {
+                              SendNotification.sendFcmMessage(
                                 Constant.restaurantRejected,
-                                orderModel.author!.fcmToken.toString(), {});
+                                orderModel.author!.fcmToken.toString(),
+                                {
+                                  'orderId': orderModel.id ?? '',
+                                  'status': Constant.orderRejected,
+                                },
+                              );
+                            }
 
                             if (orderModel.paymentMethod!.toLowerCase() !=
                                 'cod') {
@@ -1673,9 +1681,17 @@ class HomeScreen extends StatelessWidget {
                                   {'title': 'Cancelled Order'});
                             }
                             await FireStoreUtils.updateOrder(orderModel);
-                            SendNotification.sendFcmMessage(
+                            // Notify customer on order cancel
+                            if (orderModel.author?.fcmToken != null && orderModel.author!.fcmToken!.isNotEmpty) {
+                              SendNotification.sendFcmMessage(
                                 Constant.restaurantCancelled,
-                                orderModel.author!.fcmToken.toString(), {});
+                                orderModel.author!.fcmToken.toString(),
+                                {
+                                  'orderId': orderModel.id ?? '',
+                                  'status': Constant.orderCancelled,
+                                },
+                              );
+                            }
 
                             if (orderModel.paymentMethod!.toLowerCase() !=
                                 'cod') {

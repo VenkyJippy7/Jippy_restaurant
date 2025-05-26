@@ -157,7 +157,7 @@ class SubscriptionController extends GetxController {
         if (stripeModel.value.isEnabled == true) {
           Stripe.publishableKey =
               stripeModel.value.clientpublishableKey.toString();
-          Stripe.merchantIdentifier = 'Foodie Restaurant'.tr;
+          Stripe.merchantIdentifier = 'Jippymart Restaurant'.tr;
           Stripe.instance.applySettings();
         }
         setRef();
@@ -719,7 +719,7 @@ class SubscriptionController extends GetxController {
             Get.back(result: true);
           }
           ShowToastDialog.showToast(
-              "Success! You’ve unlocked your subscription benefits starting today."
+              "Success! You've unlocked your subscription benefits starting today."
                   .tr);
         } else {
           Get.offAll(const AppNotAccessScreen());

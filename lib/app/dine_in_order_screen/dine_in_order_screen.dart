@@ -54,7 +54,7 @@ class DineInOrderScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Welcome to Foodie Restaurant".tr,
+                                "Welcome to Jippymart Restaurant".tr,
                                 style: TextStyle(
                                     color: themeChange.getThem()
                                         ? AppThemeData.grey900
@@ -280,7 +280,7 @@ class DineInOrderScreen extends StatelessWidget {
                                           height: 5,
                                         ),
                                         Text(
-                                          "Please add your restaurant’s dine-in details to start accepting reservations."
+                                          "Please add your restaurant's dine-in details to start accepting reservations."
                                               .tr,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(

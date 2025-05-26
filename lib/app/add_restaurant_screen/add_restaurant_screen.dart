@@ -26,6 +26,7 @@ import 'package:restaurant/themes/text_field_widget.dart';
 import 'package:restaurant/utils/dark_theme_provider.dart';
 import 'package:restaurant/utils/network_image_widget.dart';
 import 'package:restaurant/widget/osm_map/map_picker_page.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class AddRestaurantScreen extends StatelessWidget {
   const AddRestaurantScreen({super.key});
@@ -57,9 +58,14 @@ class AddRestaurantScreen extends StatelessWidget {
               ),
               actions: [
                 Visibility(
-                  visible: controller.userModel.value.subscriptionPlan?.features
-                          ?.qrCodeGenerate !=
-                      false,
+
+                  ///this is for the QR Code
+                  // visible: controller.userModel.value.subscriptionPlan?.features
+                  //         ?.qrCodeGenerate !=
+                  //     false,
+                  ///above code is for QR code
+                  ///
+                  visible: false,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: RoundedButtonFill(
@@ -734,16 +740,51 @@ class AddRestaurantScreen extends StatelessWidget {
                               ),
                             ],
                           ),
+                          // Self Delivery Service
                           if (Constant.isSelfDeliveryFeature == true)
                             const SizedBox(
                               height: 10,
                             ),
                           if (Constant.isSelfDeliveryFeature == true)
-                            Row(
+                            Visibility(
+                              visible: false,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "Self Delivery Service".tr,
+                                      style: TextStyle(
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.grey50
+                                              : AppThemeData.grey900,
+                                          fontFamily: AppThemeData.medium,
+                                          fontSize: 18),
+                                    ),
+                                  ),
+                                  Transform.scale(
+                                    scale: 0.8,
+                                    child: CupertinoSwitch(
+                                      value: controller.isSelfDelivery.value,
+                                      onChanged: (value) {
+                                        controller.isSelfDelivery.value = value;
+                                        controller.update();
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          // Delivery Settings
+                          Visibility(
+                            visible: false,
+                            child: Row(
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "Self Delivery Service".tr,
+                                    "Delivery Settings".tr,
                                     style: TextStyle(
                                         color: themeChange.getThem()
                                             ? AppThemeData.grey50
@@ -755,116 +796,101 @@ class AddRestaurantScreen extends StatelessWidget {
                                 Transform.scale(
                                   scale: 0.8,
                                   child: CupertinoSwitch(
-                                    value: controller.isSelfDelivery.value,
-                                    onChanged: (value) {
-                                      controller.isSelfDelivery.value = value;
-                                      controller.update();
-                                    },
+                                    value:
+                                        controller.isEnableDeliverySettings.value,
+                                    onChanged: (value) {},
                                   ),
                                 ),
                               ],
                             ),
-                          const SizedBox(
-                            height: 10,
                           ),
-                          Row(
-                            children: [
-                              Expanded(
+                          // Charges per km (distance)
+                          Visibility(
+                            visible: false,
+                            child: TextFieldWidget(
+                              title:
+                                  '${'Charges per'.tr} ${Constant.distanceType} ${'(distance)'.tr}'
+                                      .tr,
+                              controller: controller.chargePerKmController.value,
+                              hintText: 'Enter charges'.tr,
+                              enable: controller.isEnableDeliverySettings.value,
+                              textInputType:
+                                  const TextInputType.numberWithOptions(
+                                      signed: true, decimal: true),
+                              textInputAction: TextInputAction.done,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp('[0-9]')),
+                              ],
+                              prefix: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 14),
                                 child: Text(
-                                  "Delivery Settings".tr,
+                                  "${Constant.currencyModel!.symbol}".tr,
                                   style: TextStyle(
                                       color: themeChange.getThem()
                                           ? AppThemeData.grey50
                                           : AppThemeData.grey900,
-                                      fontFamily: AppThemeData.medium,
+                                      fontFamily: AppThemeData.semiBold,
                                       fontSize: 18),
                                 ),
                               ),
-                              Transform.scale(
-                                scale: 0.8,
-                                child: CupertinoSwitch(
-                                  value:
-                                      controller.isEnableDeliverySettings.value,
-                                  onChanged: (value) {},
+                            ),
+                          ),
+                          // Min Delivery Charges
+                          Visibility(
+                            visible: false,
+                            child: TextFieldWidget(
+                              title: 'Min Delivery Charges'.tr,
+                              controller:
+                                  controller.minDeliveryChargesController.value,
+                              hintText: 'Enter Min Delivery Charges'.tr,
+                              enable: controller.isEnableDeliverySettings.value,
+                              textInputType:
+                                  const TextInputType.numberWithOptions(
+                                      signed: true, decimal: true),
+                              textInputAction: TextInputAction.done,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp('[0-9]')),
+                              ],
+                              prefix: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 14),
+                                child: Text(
+                                  "${Constant.currencyModel!.symbol}".tr,
+                                  style: TextStyle(
+                                      color: themeChange.getThem()
+                                          ? AppThemeData.grey50
+                                          : AppThemeData.grey900,
+                                      fontFamily: AppThemeData.semiBold,
+                                      fontSize: 18),
                                 ),
                               ),
-                            ],
-                          ),
-                          TextFieldWidget(
-                            title:
-                                '${'Charges per'.tr} ${Constant.distanceType} ${'(distance)'.tr}'
-                                    .tr,
-                            controller: controller.chargePerKmController.value,
-                            hintText: 'Enter charges'.tr,
-                            enable: controller.isEnableDeliverySettings.value,
-                            textInputType:
-                                const TextInputType.numberWithOptions(
-                                    signed: true, decimal: true),
-                            textInputAction: TextInputAction.done,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp('[0-9]')),
-                            ],
-                            prefix: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 14),
-                              child: Text(
-                                "${Constant.currencyModel!.symbol}".tr,
-                                style: TextStyle(
-                                    color: themeChange.getThem()
-                                        ? AppThemeData.grey50
-                                        : AppThemeData.grey900,
-                                    fontFamily: AppThemeData.semiBold,
-                                    fontSize: 18),
-                              ),
                             ),
                           ),
-                          TextFieldWidget(
-                            title: 'Min Delivery Charges'.tr,
-                            controller:
-                                controller.minDeliveryChargesController.value,
-                            hintText: 'Enter Min Delivery Charges'.tr,
-                            enable: controller.isEnableDeliverySettings.value,
-                            textInputType:
-                                const TextInputType.numberWithOptions(
-                                    signed: true, decimal: true),
-                            textInputAction: TextInputAction.done,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp('[0-9]')),
-                            ],
-                            prefix: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 14),
-                              child: Text(
-                                "${Constant.currencyModel!.symbol}".tr,
-                                style: TextStyle(
-                                    color: themeChange.getThem()
-                                        ? AppThemeData.grey50
-                                        : AppThemeData.grey900,
-                                    fontFamily: AppThemeData.semiBold,
-                                    fontSize: 18),
-                              ),
+                          // Min Delivery Charges within km
+                          Visibility(
+                            visible: false,
+                            child: TextFieldWidget(
+                              title:
+                                  '${'Min Delivery Charges within'.tr} ${Constant.distanceType} ${'(distance)'.tr}'
+                                      .tr,
+                              controller: controller
+                                  .minDeliveryChargesWithinKMController.value,
+                              hintText:
+                                  '${'Enter Min Delivery Charges within'.tr} ${Constant.distanceType} ${'(distance)'.tr}'
+                                      .tr,
+                              enable: controller.isEnableDeliverySettings.value,
+                              textInputType:
+                                  const TextInputType.numberWithOptions(
+                                      signed: true, decimal: true),
+                              textInputAction: TextInputAction.done,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp('[0-9]')),
+                              ],
                             ),
-                          ),
-                          TextFieldWidget(
-                            title:
-                                '${'Min Delivery Charges within'.tr} ${Constant.distanceType} ${'(distance)'.tr}'
-                                    .tr,
-                            controller: controller
-                                .minDeliveryChargesWithinKMController.value,
-                            hintText:
-                                '${'Enter Min Delivery Charges within'.tr} ${Constant.distanceType} ${'(distance)'.tr}'
-                                    .tr,
-                            enable: controller.isEnableDeliverySettings.value,
-                            textInputType:
-                                const TextInputType.numberWithOptions(
-                                    signed: true, decimal: true),
-                            textInputAction: TextInputAction.done,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp('[0-9]')),
-                            ],
                           ),
                           const SizedBox(
                             height: 20,

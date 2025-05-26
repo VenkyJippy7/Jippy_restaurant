@@ -42,7 +42,7 @@ class SignupScreen extends StatelessWidget {
                           fontFamily: AppThemeData.semiBold),
                     ),
                     Text(
-                      "Join Foodie Restaurant today and start managing your restaurant’s orders and reservations effortlessly."
+                      "Join Jippymart Restaurant today and start managing your restaurant's orders and reservations effortlessly."
                           .tr,
                       style: TextStyle(
                           color: themeChange.getThem()

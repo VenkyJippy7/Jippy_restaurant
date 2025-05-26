@@ -181,8 +181,8 @@ const Map<String, String> enUS = {
   "Please select second below video.": "Please select second below video.",
   "Choose thimbling image / GIF": "Choose thimbling image / GIF",
   "Welcome Back! 👋": "Welcome Back! 👋",
-  "Log in to continue managing your restaurant’s orders and reservations seamlessly.":
-      "Log in to continue managing your restaurant’s orders and reservations seamlessly.",
+  "Log in to continue managing your restaurant's orders and reservations seamlessly.":
+      "Log in to continue managing your restaurant's orders and reservations seamlessly.",
   "Email": "Email",
   "Enter email address": "Enter email address",
   "Password": "Password",
@@ -196,7 +196,7 @@ const Map<String, String> enUS = {
   'Continue with Mobile Number': 'Continue with Mobile Number',
   "or": "or",
   "Log in with Mobile Number": "Log in with Mobile Number",
-  "Didn’t have an account?": "Didn’t have an account?",
+  "Didn't have an account?": "Didn't have an account?",
   "Sign up": "Sign up",
   'with Google': 'with Google',
   'with Apple': 'with Apple',
@@ -212,8 +212,7 @@ const Map<String, String> enUS = {
       "This user is disable please contact to administrator",
   "Invalid Code": "Invalid Code",
   "Enter Valid otp": "Enter Valid otp",
-  'Did’t receive any code? ': 'Did’t receive any code? ',
-  "Did’t receive any code?": "Did’t receive any code?",
+  "Did't receive any code?": "Did't receive any code?",
   "Send Again": "Send Again",
   "Log in to continue enjoying delicious food delivered to your doorstep.":
       "Log in to continue enjoying delicious food delivered to your doorstep.",
@@ -222,8 +221,8 @@ const Map<String, String> enUS = {
   "Please enter mobile number": "Please enter mobile number",
   "Continue with Email": "Continue with Email",
   "Create an Account": "Create an Account",
-  "Join Foodie Restaurant today and start managing your restaurant’s orders and reservations effortlessly.":
-      "Join Foodie Restaurant today and start managing your restaurant’s orders and reservations effortlessly.",
+  "Join jippymart Restaurant today and start managing your restaurant's orders and reservations effortlessly.":
+      "Join jippymart Restaurant today and start managing your restaurant's orders and reservations effortlessly.",
   "First Name": "First Name",
   "Enter First Name": "Enter First Name",
   "Last Name": "Last Name",
@@ -276,7 +275,7 @@ const Map<String, String> enUS = {
   "Products": "Products",
   "Wallet": "Wallet",
   "Profile": "Profile",
-  "Welcome to Foodie Restaurant": "Welcome to Foodie Restaurant",
+  "Welcome to jippymart Restaurant": "Welcome to jippymart Restaurant",
   "New": "New",
   "History": "History",
   "Document Verification in Pending": "Document Verification in Pending",
@@ -288,8 +287,8 @@ const Map<String, String> enUS = {
       "Get started by adding your restaurant details to manage your menu, orders, and reservations.",
   "Add Restaurant": "Add Restaurant",
   "Dine-In Details Missing": "Dine-In Details Missing",
-  "Please add your restaurant’s dine-in details to start accepting reservations.":
-      "Please add your restaurant’s dine-in details to start accepting reservations.",
+  "Please add your restaurant's dine-in details to start accepting reservations.":
+      "Please add your restaurant's dine-in details to start accepting reservations.",
   "Upcoming Booking not found.": "Upcoming Booking not found.",
   "History not found.": "History not found.",
   "Name": "Name",
@@ -318,8 +317,8 @@ const Map<String, String> enUS = {
   "camera": "camera",
   "gallery": "gallery",
   'End Time': 'End Time',
-  "No worries!! We’ll send you reset instructions":
-      "No worries!! We’ll send you reset instructions",
+  "No worries!! We'll send you reset instructions":
+      "No worries!! We'll send you reset instructions",
   "Accepted": "Accepted",
   "Completed": "Completed",
   "Rejected": "Rejected",
@@ -472,8 +471,8 @@ const Map<String, String> enUS = {
   "Share app": "Share app",
   "Rate the app": "Rate the app",
   'Look what I made!': 'Look what I made!',
-  "Check out Foodie, your ultimate food delivery application! \n\nGoogle Play:":
-      "Check out Foodie, your ultimate food delivery application! \n\nGoogle Play:",
+  "Check out jippymart, your ultimate food delivery application! \n\nGoogle Play:":
+      "Check out jippymart, your ultimate food delivery application! \n\nGoogle Play:",
   "\n\nApp Store:": "\n\nApp Store:",
   "Legal": "Legal",
   'Social': 'Social',
@@ -562,11 +561,11 @@ const Map<String, String> enUS = {
   "HH:mm": "HH:mm",
   "Start Time": "Start Time",
   "Remove Time": "Remove Time",
-  "Foodie": "Foodie",
+  "Jippymart": "Jippymart",
   "Get Started": "Get Started",
   "Your Favorite Food Delivered Fast!": "Your Favorite Food Delivered Fast!",
-  "Your current plan doesn’t include this feature. Upgrade to get access now.":
-      "Your current plan doesn’t include this feature. Upgrade to get access now.",
+  "Your current plan doesn't include this feature. Upgrade to get access now.":
+      "Your current plan doesn't include this feature. Upgrade to get access now.",
   "Access denied": "Access denied",
   "Upgrade Plan": "Upgrade Plan",
   "Subscription Management": "Subscription Management",
@@ -577,8 +576,8 @@ const Map<String, String> enUS = {
   "Please Select Subscription Plan": "Please Select Subscription Plan",
   "Change Plan": "Change Plan",
   "Select Plan": "Select Plan",
-  "Success! You’ve unlocked your subscription benefits starting today.":
-      "Success! You’ve unlocked your subscription benefits starting today.",
+  "Success! You've unlocked your subscription benefits starting today.":
+      "Success! You've unlocked your subscription benefits starting today.",
   "Your current subscription plan has reached its maximum product limit. Upgrade now to add more products.":
       "Your current subscription plan has reached its maximum product limit. Upgrade now to add more products.",
   "Your current subscription plan has reached its maximum order limit. Upgrade now to accept more order.":
