@@ -15,11 +15,35 @@
       },
       "oauth_client": [
         {
+          "client_id": "592427852800-8a25j4o1449g71bm6lhrnamfcis3ud1v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jippymart.customer",
+            "certificate_hash": "025a96a59c4466c7e2bc344703a3855982572b99"
+          }
+        },
+        {
+          "client_id": "592427852800-ihpg7e9ajfmpkp656abg3grt02ne760d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jippymart.customer",
+            "certificate_hash": "6ef655b8ba29f9853af212c39f710f87c721c91b"
+          }
+        },
+        {
           "client_id": "592427852800-kl50sevg036nfplapf4aruogtpoh12lk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.jippymart.customer",
             "certificate_hash": "036d0ea7d35cee20af41ca99b79232f71215e3e0"
+          }
+        },
+        {
+          "client_id": "592427852800-oift2du3ol97ivabfjom0ut1n51jksbs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jippymart.customer",
+            "certificate_hash": "aa28ea468b5175380c694ca9c3966ec8de43c96b"
           }
         },
         {
@@ -30,6 +54,73 @@
       "api_key": [
         {
           "current_key": "AIzaSyBRdk2BoUowc2FgvAwI0oDF_0fhbazoTQs"
+        },
+        {
+          "current_key": "AIzaSyASZwyooi_hX0vIvY8HZJ4SdfaFWLFVvyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592427852800-g14719r8ejten85kqpasqmpqnhetce2q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592427852800:android:57cd1bc03d1e1c77d1a4e5",
+        "android_client_info": {
+          "package_name": "com.jippymart.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592427852800-6dperi3t1o86p5402oj7kbot5t79ua1s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jippymart.driver",
+            "certificate_hash": "6ef655b8ba29f9853af212c39f710f87c721c91b"
+          }
+        },
+        {
+          "client_id": "592427852800-9jabhj49nv2r94fh0jj5bkr96hpt4ejf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jippymart.driver",
+            "certificate_hash": "3cc4f624d6d319a91d0f02a5b1f6757250ccb3af"
+          }
+        },
+        {
+          "client_id": "592427852800-efc29hrrpiuhkbtfoce3qdtsq59bk3nf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jippymart.driver",
+            "certificate_hash": "479ac23c80cf28f20115b22301d38cee8c44eeca"
+          }
+        },
+        {
+          "client_id": "592427852800-mfduq0rkgp4udh360orpf69lk03cfjq9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jippymart.driver",
+            "certificate_hash": "e3522b4c3ba72b85d2736f7f9ab8f45198fccd0d"
+          }
+        },
+        {
+          "client_id": "592427852800-g14719r8ejten85kqpasqmpqnhetce2q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRdk2BoUowc2FgvAwI0oDF_0fhbazoTQs"
+        },
+        {
+          "current_key": "AIzaSyASZwyooi_hX0vIvY8HZJ4SdfaFWLFVvyo"
         }
       ],
       "services": {
@@ -52,11 +143,35 @@
       },
       "oauth_client": [
         {
+          "client_id": "592427852800-0vu074e55r2l1v3h48qi8bkvd6u52h20.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jippymart.restaurant",
+            "certificate_hash": "71d3012afc98dc8c01fcbd1b5572b8345673da07"
+          }
+        },
+        {
+          "client_id": "592427852800-29li09mheom9s2imv5764r2gpupl5c4t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jippymart.restaurant",
+            "certificate_hash": "f946d7e3a528135a78a7bddd84736b86f4db3e95"
+          }
+        },
+        {
           "client_id": "592427852800-3iisvvnkpc7seib62hjrpkqmrg6cqbqm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.jippymart.restaurant",
             "certificate_hash": "a0423495c6672877a75844b37012ae1961e77cc1"
+          }
+        },
+        {
+          "client_id": "592427852800-m93qmfuiqprs8m1f73rbpgu7npsj9e9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jippymart.restaurant",
+            "certificate_hash": "6ef655b8ba29f9853af212c39f710f87c721c91b"
           }
         },
         {
@@ -67,6 +182,9 @@
       "api_key": [
         {
           "current_key": "AIzaSyBRdk2BoUowc2FgvAwI0oDF_0fhbazoTQs"
+        },
+        {
+          "current_key": "AIzaSyASZwyooi_hX0vIvY8HZJ4SdfaFWLFVvyo"
         }
       ],
       "services": {

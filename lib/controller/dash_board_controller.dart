@@ -6,10 +6,12 @@ import 'package:restaurant/app/profile_screen/profile_screen.dart';
 import 'package:restaurant/app/wallet_screen/wallet_screen.dart';
 import 'package:restaurant/constant/constant.dart';
 import 'package:restaurant/utils/fire_store_utils.dart';
+import 'package:restaurant/models/vendor_model.dart';
 
 class DashBoardController extends GetxController {
   RxInt selectedIndex = 0.obs;
   RxList pageList = [].obs;
+  Rx<VendorModel> vendorModel = VendorModel().obs;
 
   @override
   void onInit() {
@@ -45,10 +47,17 @@ class DashBoardController extends GetxController {
         (value) {
           if (value != null) {
             Constant.vendorAdminCommission = value.adminCommission;
+            vendorModel.value = value;
           }
         },
       );
     }
+  }
+
+  Future<void> updateRestStatus(bool status) async {
+    vendorModel.value.reststatus = status;
+    await FireStoreUtils.updateVendor(vendorModel.value);
+    vendorModel.refresh();
   }
 
   DateTime? currentBackPressTime;

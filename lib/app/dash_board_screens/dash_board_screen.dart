@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant/utils/fire_store_utils.dart';
 
 class DashBoardScreen extends StatelessWidget {
   const DashBoardScreen({super.key});
@@ -33,7 +34,47 @@ class DashBoardScreen extends StatelessWidget {
               }
             },
             child: Scaffold(
-              body: controller.pageList[controller.selectedIndex.value],
+              body: SafeArea(
+                child: Column(
+                  children: [
+                    Builder(
+                      builder: (context) => Obx(() => SwitchListTile(
+                        title: Text(controller.vendorModel.value.reststatus == true
+                            ? 'Restaurant Open'
+                            : 'Restaurant Closed'),
+                        value: controller.vendorModel.value.reststatus ?? false,
+                        onChanged: (val) async {
+                          final confirm = await showDialog<bool>(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text(val ? 'Open Restaurant?' : 'Close Restaurant?'),
+                              content: Text(val
+                                  ? 'Are you sure you want to open the restaurant and start accepting orders?'
+                                  : 'Are you sure you want to close the restaurant and stop accepting orders?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.of(context).pop(false),
+                                  child: Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.of(context).pop(true),
+                                  child: Text('Yes'),
+                                ),
+                              ],
+                            ),
+                          );
+                          if (confirm == true) {
+                            controller.updateRestStatus(val);
+                          }
+                        },
+                      )),
+                    ),
+                    Expanded(
+                      child: controller.pageList[controller.selectedIndex.value],
+                    ),
+                  ],
+                ),
+              ),
               bottomNavigationBar: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
                 showUnselectedLabels: true,

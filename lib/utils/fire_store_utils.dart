@@ -1919,4 +1919,11 @@ class FireStoreUtils {
     }
     return driverList;
   }
+
+  static Future<void> updateProductIsAvailable(String productId, bool isAvailable) async {
+    await fireStore
+        .collection(CollectionName.vendorProducts)
+        .doc(productId)
+        .update({'isAvailable': isAvailable});
+  }
 }

@@ -16,6 +16,58 @@ import 'package:restaurant/utils/dark_theme_provider.dart';
 import 'package:restaurant/utils/fire_store_utils.dart';
 import 'package:restaurant/utils/network_image_widget.dart';
 
+class ProductToggles extends StatelessWidget {
+  final bool isPublished;
+  final bool isAvailable;
+  final ValueChanged<bool> onPublishChanged;
+  final ValueChanged<bool> onAvailableChanged;
+
+  const ProductToggles({
+    required this.isPublished,
+    required this.isAvailable,
+    required this.onPublishChanged,
+    required this.onAvailableChanged,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final isSmall = MediaQuery.of(context).size.width < 350;
+    return isSmall
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _toggleRow('Publish', isPublished, onPublishChanged),
+              _toggleRow('Available', isAvailable, onAvailableChanged),
+            ],
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _toggleRow('Publish', isPublished, onPublishChanged),
+              SizedBox(width: 12),
+              _toggleRow('Available', isAvailable, onAvailableChanged),
+            ],
+          );
+  }
+
+  Widget _toggleRow(String label, bool value, ValueChanged<bool> onChanged) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+        Transform.scale(
+          scale: 0.7,
+          child: CupertinoSwitch(
+            value: value,
+            onChanged: onChanged,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class ProductListScreen extends StatelessWidget {
   const ProductListScreen({super.key});
 
@@ -347,7 +399,6 @@ class ProductListScreen extends StatelessWidget {
                                     horizontal: 16, vertical: 10),
                                 child: ListView.builder(
                                   itemCount: controller.productList.length,
-                                  shrinkWrap: true,
                                   itemBuilder: (context, index) {
                                     String price = "0.0";
                                     String disPrice = "0.0";
@@ -434,7 +485,9 @@ class ProductListScreen extends StatelessWidget {
                                     }
 
                                     return InkWell(
-                                      onTap: () {
+                                      onTap: controller.productList[index].isAvailable == false
+                                          ? null
+                                          : () {
                                         Get.to(const AddProductScreen(),
                                                 arguments: {
                                               "productModel":
@@ -451,9 +504,13 @@ class ProductListScreen extends StatelessWidget {
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 5),
+                                        child: Opacity(
+                                          opacity: controller.productList[index].isAvailable == false ? 0.5 : 1.0,
                                         child: Container(
                                           decoration: ShapeDecoration(
-                                            color: themeChange.getThem()
+                                              color: controller.productList[index].isAvailable == false
+                                                  ? Colors.grey[300]
+                                                  : themeChange.getThem()
                                                 ? AppThemeData.grey900
                                                 : AppThemeData.grey50,
                                             shape: RoundedRectangleBorder(
@@ -676,118 +733,42 @@ class ProductListScreen extends StatelessWidget {
                                                           ),
                                                         ],
                                                       ),
-                                                    )
-                                                  ],
-                                                ),
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Expanded(
-                                                      child: InkWell(
-                                                        onTap: () async {
-                                                          ShowToastDialog
-                                                              .showLoader(
-                                                                  "Please wait.."
-                                                                      .tr);
-                                                          await FireStoreUtils
-                                                                  .deleteProduct(
-                                                                      controller
-                                                                              .productList[
-                                                                          index])
-                                                              .then(
-                                                            (value) {
-                                                              controller
-                                                                  .getProduct();
-                                                              ShowToastDialog
-                                                                  .closeLoader();
-                                                            },
-                                                          );
-                                                        },
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            SvgPicture.asset(
-                                                                "assets/icons/ic_delete-one.svg"),
-                                                            const SizedBox(
-                                                              width: 10,
-                                                            ),
-                                                            Text(
-                                                              "Delete".tr,
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style: TextStyle(
-                                                                  color: themeChange.getThem()
-                                                                      ? AppThemeData
-                                                                          .danger300
-                                                                      : AppThemeData
-                                                                          .danger300,
-                                                                  fontSize: 16,
-                                                                  fontFamily:
-                                                                      AppThemeData
-                                                                          .bold),
-                                                            ),
-                                                          ],
-                                                        ),
                                                       ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            "Publish".tr,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: TextStyle(
-                                                                color: themeChange.getThem()
-                                                                    ? AppThemeData
-                                                                        .grey100
-                                                                    : AppThemeData
-                                                                        .grey800,
-                                                                fontSize: 16,
-                                                                fontFamily:
-                                                                    AppThemeData
-                                                                        .bold),
+                                                      IconButton(
+                                                        icon: Icon(Icons.delete, color: AppThemeData.danger300),
+                                                        onPressed: () {
+                                                          showDialog(
+                                                            context: context,
+                                                            builder: (context) => AlertDialog(
+                                                              title: Text('Delete Product?'),
+                                                              content: Text('Are you sure you want to delete this product?'),
+                                                              actions: [
+                                                                TextButton(
+                                                                  onPressed: () => Navigator.of(context).pop(),
+                                                                  child: Text('Cancel'),
+                                                                ),
+                                                                TextButton(
+                                                                  onPressed: () {
+                                                                    Navigator.of(context).pop();
+                                                                    controller.deleteProduct(index);
+                                                                  },
+                                                                  child: Text('Delete', style: TextStyle(color: AppThemeData.danger300)),
                                                           ),
-                                                          Transform.scale(
-                                                            scale: 0.6,
-                                                            child:
-                                                                CupertinoSwitch(
-                                                              value: controller
-                                                                      .productList[
-                                                                          index]
-                                                                      .publish ??
-                                                                  false,
-                                                              onChanged:
-                                                                  (value) async {
-                                                                controller.updateList(
-                                                                    index,
-                                                                    controller
-                                                                        .productList[
-                                                                            index]
-                                                                        .publish!);
-                                                              },
+                                                              ],
                                                             ),
+                                                          );
+                                                              },
                                                           ),
                                                         ],
                                                       ),
-                                                    ),
-                                                  ],
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  ProductToggles(
+                                                    isPublished: controller.productList[index].publish ?? false,
+                                                    isAvailable: controller.productList[index].isAvailable ?? true,
+                                                    onPublishChanged: (val) => controller.updateList(index, controller.productList[index].publish!),
+                                                    onAvailableChanged: (val) => controller.updateAvailableStatus(index, controller.productList[index].isAvailable ?? true),
                                                 ),
                                                 Visibility(
                                                   visible: isDisplayItemAlert,
@@ -809,6 +790,7 @@ class ProductListScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                               ],
+                                              ),
                                             ),
                                           ),
                                         ),

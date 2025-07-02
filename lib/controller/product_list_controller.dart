@@ -53,4 +53,19 @@ class ProductListController extends GetxController {
     update();
     await FireStoreUtils.setProduct(productModel);
   }
+
+  updateAvailableStatus(int index, bool isAvailable) async {
+    ProductModel productModel = productList[index];
+    productModel.isAvailable = !isAvailable;
+    productList[index] = productModel;
+    update();
+    await FireStoreUtils.updateProductIsAvailable(productModel.id!, productModel.isAvailable!);
+  }
+
+  Future<void> deleteProduct(int index) async {
+    final product = productList[index];
+    await FireStoreUtils.deleteProduct(product);
+    productList.removeAt(index);
+    update();
+  }
 }
