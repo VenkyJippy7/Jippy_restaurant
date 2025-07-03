@@ -1926,4 +1926,22 @@ class FireStoreUtils {
         .doc(productId)
         .update({'isAvailable': isAvailable});
   }
+
+  static Future<void> updateCategoryIsActive(String categoryId, bool isActive) async {
+    await fireStore
+        .collection(CollectionName.vendorCategories)
+        .doc(categoryId)
+        .update({'isActive': isActive});
+  }
+
+  static Future<void> setAllProductsAvailabilityForCategory(String categoryId, bool isAvailable) async {
+    final query = await fireStore
+        .collection(CollectionName.vendorProducts)
+        .where('vendorID', isEqualTo: Constant.userModel!.vendorID)
+        .where('categoryID', isEqualTo: categoryId)
+        .get();
+    for (var doc in query.docs) {
+      await doc.reference.update({'isAvailable': isAvailable});
+    }
+  }
 }

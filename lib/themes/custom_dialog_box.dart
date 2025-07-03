@@ -143,7 +143,7 @@ class CustomDialogBox extends StatelessWidget {
                     width: Responsive.width(100, context),
                     height: Responsive.height(5, context),
                     decoration: ShapeDecoration(
-                      color: AppThemeData.warning400,
+                      color: AppThemeData.secondary300,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(200),
                       ),

@@ -88,16 +88,16 @@ class HomeScreen extends StatelessWidget {
                                 "Welcome to Jippymart Restaurant".tr,
                                 style: TextStyle(
                                     color: themeChange.getThem()
-                                        ? AppThemeData.grey900
+                                        ? AppThemeData.grey50
                                         : AppThemeData.grey50,
-                                    fontSize: 12,
-                                    fontFamily: AppThemeData.regular),
+                                    fontSize: 13,
+                                    fontFamily: AppThemeData.bold),
                               ),
                               Text(
                                 "${controller.userModel.value.fullName()}".tr,
                                 style: TextStyle(
                                     color: themeChange.getThem()
-                                        ? AppThemeData.grey900
+                                        ? AppThemeData.grey50
                                         : AppThemeData.grey50,
                                     fontSize: 16,
                                     fontFamily: AppThemeData.semiBold),
@@ -118,9 +118,7 @@ class HomeScreen extends StatelessWidget {
                             : AppThemeData.grey50,
                         unselectedLabelStyle:
                             const TextStyle(fontFamily: AppThemeData.medium),
-                        unselectedLabelColor: themeChange.getThem()
-                            ? AppThemeData.secondary100
-                            : AppThemeData.secondary100,
+                        unselectedLabelColor: Color(0xFFD5DBDB),
                         indicatorColor: AppThemeData.secondary300,
                         isScrollable: true,
                         padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -947,7 +945,7 @@ class HomeScreen extends StatelessWidget {
                       Expanded(
                         child: RoundedButtonFill(
                           title: "Reject".tr,
-                          color: AppThemeData.danger300,
+                          color: AppThemeData.new_primary,
                           textColor: AppThemeData.grey50,
                           height: 5,
                           onPress: () async {
@@ -1080,7 +1078,7 @@ class HomeScreen extends StatelessWidget {
                               : RoundedButtonFill(
                                   title: "Accept".tr,
                                   height: 5,
-                                  color: AppThemeData.success400,
+                                  color: AppThemeData.new_green_tog,
                                   textColor: AppThemeData.grey50,
                                   onPress: () async {
                                     // if ((Constant.isSubscriptionModelApplied == true || Constant.adminCommission?.isEnabled == true) &&
@@ -1658,7 +1656,7 @@ class HomeScreen extends StatelessWidget {
                       Expanded(
                         child: RoundedButtonFill(
                           title: "Cancel Order".tr,
-                          color: AppThemeData.danger300,
+                          color: AppThemeData.new_primary,
                           textColor: AppThemeData.grey50,
                           height: 5,
                           onPress: () async {
@@ -1818,7 +1816,7 @@ class HomeScreen extends StatelessWidget {
                               )
                             : RoundedButtonFill(
                                 title: orderModel.status.toString(),
-                                color: AppThemeData.secondary300,
+                                color: AppThemeData.new_green_tog,
                                 textColor: AppThemeData.grey50,
                                 height: 5,
                                 onPress: () async {},

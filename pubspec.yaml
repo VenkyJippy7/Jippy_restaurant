@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+3
+version: 2.0.0+4
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -130,56 +130,49 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+flutter_native_splash:
+  color: "#ffffff"
+  android: true
+  ios: true
+  web: false
+
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
-
   fonts:
-    - family: Urbanist-Black
+    - family: Outfit-Black
       fonts:
-        - asset: assets/fonts/Urbanist-Black.ttf
-
-    - family: Urbanist-Bold
+        - asset: assets/fonts/Outfit-Black.ttf
+    - family: Outfit-Bold
       fonts:
-        - asset: assets/fonts/Urbanist-Bold.ttf
-
-    - family: Urbanist-ExtraBold
+        - asset: assets/fonts/Outfit-Bold.ttf
+    - family: Outfit-ExtraBold
       fonts:
-        - asset: assets/fonts/Urbanist-ExtraBold.ttf
-
-    - family: Urbanist-ExtraLight
+        - asset: assets/fonts/Outfit-ExtraBold.ttf
+    - family: Outfit-ExtraLight
       fonts:
-        - asset: assets/fonts/Urbanist-ExtraLight.ttf
-
-    - family: Urbanist-Light
+        - asset: assets/fonts/Outfit-ExtraLight.ttf
+    - family: Outfit-Light
       fonts:
-        - asset: assets/fonts/Urbanist-Light.ttf
-
-    - family: Urbanist-Medium
+        - asset: assets/fonts/Outfit-Light.ttf
+    - family: Outfit-Medium
       fonts:
-        - asset: assets/fonts/Urbanist-Medium.ttf
-
-    - family: Urbanist-Regular
+        - asset: assets/fonts/Outfit-Medium.ttf
+    - family: Outfit-Regular
       fonts:
-        - asset: assets/fonts/Urbanist-Regular.ttf
-
-    - family: Urbanist-SemiBold
+        - asset: assets/fonts/Outfit-Regular.ttf
+    - family: Outfit-SemiBold
       fonts:
-        - asset: assets/fonts/Urbanist-SemiBold.ttf
-
-    - family: Urbanist-Thin
+        - asset: assets/fonts/Outfit-SemiBold.ttf
+    - family: Outfit-Thin
       fonts:
-        - asset: assets/fonts/Urbanist-Thin.ttf
-
-  # To add assets to your application, add an assets section, like this:
+        - asset: assets/fonts/Outfit-Thin.ttf
   assets:
     - assets/images/
     - assets/icons/
     - assets/fonts/
     - assets/
+    - assets/videos/splash.mp4
+    - assets/videos/output_splash.mp4
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

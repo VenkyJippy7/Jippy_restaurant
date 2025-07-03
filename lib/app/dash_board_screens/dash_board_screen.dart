@@ -58,7 +58,8 @@ class DashBoardScreen extends StatelessWidget {
                                 ),
                                 TextButton(
                                   onPressed: () => Navigator.of(context).pop(true),
-                                  child: Text('Yes'),
+                                  child: Text('Yes', style: TextStyle(color: AppThemeData.new_primary),),
+
                                 ),
                               ],
                             ),
@@ -67,6 +68,14 @@ class DashBoardScreen extends StatelessWidget {
                             controller.updateRestStatus(val);
                           }
                         },
+                        // activeColor: Color(0xFFE74C3C),
+                        thumbColor: MaterialStatePropertyAll(Colors.white),
+                        trackColor: MaterialStateProperty.resolveWith<Color>((states) {
+                          if (states.contains(MaterialState.selected)) {
+                            return Color(0xFF138D75); // ON
+                          }
+                          return Color(0xFFC0392B); // OFF
+                        }),
                       )),
                     ),
                     Expanded(

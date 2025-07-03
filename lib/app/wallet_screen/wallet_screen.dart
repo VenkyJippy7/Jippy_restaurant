@@ -38,7 +38,7 @@ class WalletScreen extends StatelessWidget {
                 "Wallet".tr,
                 style: TextStyle(
                     color: themeChange.getThem()
-                        ? AppThemeData.grey900
+                        ? AppThemeData.grey50
                         : AppThemeData.grey50,
                     fontSize: 18,
                     fontFamily: AppThemeData.medium),
@@ -56,7 +56,7 @@ class WalletScreen extends StatelessWidget {
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                             image: DecorationImage(
-                              image: AssetImage("assets/images/wallet.png"),
+                              image: AssetImage("assets/images/wallet1.png"),
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -70,11 +70,12 @@ class WalletScreen extends StatelessWidget {
                                   maxLines: 1,
                                   style: TextStyle(
                                     color: themeChange.getThem()
-                                        ? AppThemeData.grey900
-                                        : AppThemeData.grey900,
+                                        ? AppThemeData.grey500
+                                        : AppThemeData.grey500,
                                     fontSize: 16,
                                     overflow: TextOverflow.ellipsis,
                                     fontFamily: AppThemeData.regular,
+                                    fontWeight: FontWeight.w900,
                                   ),
                                 ),
                                 Text(
@@ -85,9 +86,10 @@ class WalletScreen extends StatelessWidget {
                                   maxLines: 1,
                                   style: TextStyle(
                                     color: themeChange.getThem()
-                                        ? AppThemeData.grey900
-                                        : AppThemeData.grey900,
+                                        ? AppThemeData.new_primary
+                                        : AppThemeData.new_primary,
                                     fontSize: 22,
+                                    fontWeight: FontWeight.w600,
                                     overflow: TextOverflow.ellipsis,
                                     fontFamily: AppThemeData.bold,
                                   ),
@@ -108,8 +110,8 @@ class WalletScreen extends StatelessWidget {
                                             maxLines: 1,
                                             style: TextStyle(
                                               color: themeChange.getThem()
-                                                  ? AppThemeData.grey900
-                                                  : AppThemeData.grey900,
+                                                  ? AppThemeData.grey500
+                                                  : AppThemeData.grey500,
                                               fontSize: 14,
                                               overflow: TextOverflow.ellipsis,
                                               fontFamily: AppThemeData.regular,
@@ -123,8 +125,8 @@ class WalletScreen extends StatelessWidget {
                                             maxLines: 1,
                                             style: TextStyle(
                                               color: themeChange.getThem()
-                                                  ? AppThemeData.grey900
-                                                  : AppThemeData.grey900,
+                                                  ? AppThemeData.new_primary
+                                                  : AppThemeData.new_primary,
                                               fontSize: 18,
                                               overflow: TextOverflow.ellipsis,
                                               fontFamily: AppThemeData.bold,
@@ -141,8 +143,8 @@ class WalletScreen extends StatelessWidget {
                                             maxLines: 1,
                                             style: TextStyle(
                                               color: themeChange.getThem()
-                                                  ? AppThemeData.grey900
-                                                  : AppThemeData.grey900,
+                                                  ? AppThemeData.grey500
+                                                  : AppThemeData.grey500,
                                               fontSize: 14,
                                               overflow: TextOverflow.ellipsis,
                                               fontFamily: AppThemeData.regular,
@@ -156,8 +158,8 @@ class WalletScreen extends StatelessWidget {
                                             maxLines: 1,
                                             style: TextStyle(
                                               color: themeChange.getThem()
-                                                  ? AppThemeData.grey900
-                                                  : AppThemeData.grey900,
+                                                  ? AppThemeData.new_primary
+                                                  : AppThemeData.new_primary,
                                               fontSize: 18,
                                               overflow: TextOverflow.ellipsis,
                                               fontFamily: AppThemeData.bold,
@@ -189,7 +191,7 @@ class WalletScreen extends StatelessWidget {
                                               title: "Withdraw".tr,
                                               width: 24,
                                               height: 5,
-                                              color: AppThemeData.secondary300,
+                                              color: AppThemeData.new_primary,
                                               textColor: AppThemeData.grey50,
                                               onPress: () {
                                                 if ((Constant.userModel!
@@ -223,7 +225,7 @@ class WalletScreen extends StatelessWidget {
                                       child: RoundedButtonFill(
                                         title: "Download Statement".tr,
                                         height: 5,
-                                        color: AppThemeData.success500,
+                                        color: AppThemeData.new_green_tog,
                                         textColor: AppThemeData.grey50,
                                         onPress: () {
                                           controller.createAndSavePdf();

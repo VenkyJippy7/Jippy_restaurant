@@ -49,7 +49,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           : "Edit product".tr,
                       style: TextStyle(
                           color: themeChange.getThem()
-                              ? AppThemeData.grey900
+                              ? AppThemeData.grey50
                               : AppThemeData.grey50,
                           fontSize: 18,
                           fontFamily: AppThemeData.medium),
@@ -144,10 +144,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                       ),
                                       RoundedButtonFill(
                                         title: "Brows Image".tr,
-                                        color: AppThemeData.secondary50,
+                                        color: AppThemeData.new_primary,
                                         width: 30,
                                         height: 5,
-                                        textColor: AppThemeData.secondary300,
+                                        textColor: AppThemeData.grey50,
                                         onPress: () async {
                                           buildBottomSheet(context, controller);
                                         },
@@ -1207,105 +1207,114 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 fontFamily: AppThemeData.medium,
                                 fontSize: 14),
                           ),
+                          // const SizedBox(
+                          //   height: 20,
+                          // ),
+                          Visibility(
+                          visible: false,
+                            child: Text(
+                              "About Cal., Grams, prot.& Fats".tr,
+                              style: TextStyle(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.grey50
+                                      : AppThemeData.grey900,
+                                  fontFamily: AppThemeData.medium,
+                                  fontSize: 18),
+                            ),
+                          ),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
+                          Visibility(
+                            visible: false,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextFieldWidget(
+                                    title: 'Calories'.tr,
+                                    controller:
+                                        controller.caloriesController.value,
+                                    hintText: 'Enter Calories'.tr,
+                                    textInputAction: TextInputAction.done,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp('[0-9]')),
+                                    ],
+                                    textInputType:
+                                        const TextInputType.numberWithOptions(
+                                            signed: true, decimal: true),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: TextFieldWidget(
+                                    title: 'Grams'.tr,
+                                    controller: controller.gramsController.value,
+                                    hintText: 'Enter Grams'.tr,
+                                    textInputAction: TextInputAction.done,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp('[0-9]')),
+                                    ],
+                                    textInputType:
+                                        const TextInputType.numberWithOptions(
+                                            signed: true, decimal: true),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
+                          Visibility(
+                            visible: false,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextFieldWidget(
+                                    title: 'Protein'.tr,
+                                    controller:
+                                        controller.proteinController.value,
+                                    hintText: 'Enter Protein'.tr,
+                                    textInputAction: TextInputAction.done,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp('[0-9]')),
+                                    ],
+                                    textInputType:
+                                        const TextInputType.numberWithOptions(
+                                            signed: true, decimal: true),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: TextFieldWidget(
+                                    title: 'Fats'.tr,
+                                    controller: controller.fatsController.value,
+                                    hintText: 'Enter Fats'.tr,
+                                    textInputAction: TextInputAction.done,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp('[0-9]')),
+                                    ],
+                                    textInputType:
+                                        const TextInputType.numberWithOptions(
+                                            signed: true, decimal: true),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           const SizedBox(
                             height: 20,
                           ),
                           Text(
-                            "About Cal., Grams, prot.& Fats".tr,
-                            style: TextStyle(
-                                color: themeChange.getThem()
-                                    ? AppThemeData.grey50
-                                    : AppThemeData.grey900,
-                                fontFamily: AppThemeData.medium,
-                                fontSize: 18),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: TextFieldWidget(
-                                  title: 'Calories'.tr,
-                                  controller:
-                                      controller.caloriesController.value,
-                                  hintText: 'Enter Calories'.tr,
-                                  textInputAction: TextInputAction.done,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('[0-9]')),
-                                  ],
-                                  textInputType:
-                                      const TextInputType.numberWithOptions(
-                                          signed: true, decimal: true),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                child: TextFieldWidget(
-                                  title: 'Grams'.tr,
-                                  controller: controller.gramsController.value,
-                                  hintText: 'Enter Grams'.tr,
-                                  textInputAction: TextInputAction.done,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('[0-9]')),
-                                  ],
-                                  textInputType:
-                                      const TextInputType.numberWithOptions(
-                                          signed: true, decimal: true),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: TextFieldWidget(
-                                  title: 'Protein'.tr,
-                                  controller:
-                                      controller.proteinController.value,
-                                  hintText: 'Enter Protein'.tr,
-                                  textInputAction: TextInputAction.done,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('[0-9]')),
-                                  ],
-                                  textInputType:
-                                      const TextInputType.numberWithOptions(
-                                          signed: true, decimal: true),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                child: TextFieldWidget(
-                                  title: 'Fats'.tr,
-                                  controller: controller.fatsController.value,
-                                  hintText: 'Enter Fats'.tr,
-                                  textInputAction: TextInputAction.done,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('[0-9]')),
-                                  ],
-                                  textInputType:
-                                      const TextInputType.numberWithOptions(
-                                          signed: true, decimal: true),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "Product Type and Takeaway options".tr,
+                            "Product Type".tr,
                             style: TextStyle(
                                 color: themeChange.getThem()
                                     ? AppThemeData.grey50
@@ -1390,36 +1399,39 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               )
                             ],
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  "Enable Takeaway option".tr,
-                                  style: TextStyle(
-                                      color: themeChange.getThem()
-                                          ? AppThemeData.grey50
-                                          : AppThemeData.grey900,
-                                      fontFamily: AppThemeData.medium,
-                                      fontSize: 18),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
+                          Visibility(
+                            visible: false,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    "Enable Takeaway option".tr,
+                                    style: TextStyle(
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.grey50
+                                            : AppThemeData.grey900,
+                                        fontFamily: AppThemeData.medium,
+                                        fontSize: 18),
+                                  ),
                                 ),
-                              ),
-                              Transform.scale(
-                                scale: 0.8,
-                                child: CupertinoSwitch(
-                                  value: controller.takeAway.value,
-                                  onChanged: (value) {
-                                    controller.takeAway.value = value;
-                                  },
+                                Transform.scale(
+                                  scale: 0.8,
+                                  child: CupertinoSwitch(
+                                    value: controller.takeAway.value,
+                                    onChanged: (value) {
+                                      controller.takeAway.value = value;
+                                    },
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
+                          // const SizedBox(
+                          //   height: 20,
+                          // ),
                           Text(
                             "Specifications and Addons".tr,
                             style: TextStyle(
@@ -1610,10 +1622,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         title: "Save Details".tr,
                         height: 5.5,
                         color: themeChange.getThem()
-                            ? AppThemeData.secondary300
-                            : AppThemeData.secondary300,
+                            ? AppThemeData.new_primary
+                            : AppThemeData.new_primary,
                         textColor: themeChange.getThem()
-                            ? AppThemeData.grey900
+                            ? AppThemeData.grey50
                             : AppThemeData.grey50,
                         fontSizes: 16,
                         onPress: () async {
@@ -1782,13 +1794,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
   }
 
   buildBottomSheet(BuildContext context, AddProductController controller) {
+    bool showCameraOption = false; // Set to true to show Camera in the future
     return showModalBottomSheet(
         context: context,
         builder: (context) {
           final themeChange = Provider.of<DarkThemeProvider>(context);
           return StatefulBuilder(builder: (context, setState) {
             return SizedBox(
-              height: Responsive.height(22, context),
+              height: Responsive.height(showCameraOption ? 22 : 15, context),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -1808,25 +1821,26 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
-                                onPressed: () => controller.pickFile(
-                                    source: ImageSource.camera),
-                                icon: const Icon(
-                                  Icons.camera_alt,
-                                  size: 32,
-                                )),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 3),
-                              child: Text("Camera".tr),
-                            ),
-                          ],
+                      if (showCameraOption)
+                        Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                  onPressed: () => controller.pickFile(
+                                      source: ImageSource.camera),
+                                  icon: const Icon(
+                                    Icons.camera_alt,
+                                    size: 32,
+                                  )),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 3),
+                                child: Text("Camera".tr),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
                       Padding(
                         padding: const EdgeInsets.all(18.0),
                         child: Column(

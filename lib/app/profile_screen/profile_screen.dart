@@ -56,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
                 "Restaurant Profile".tr,
                 style: TextStyle(
                     color: themeChange.getThem()
-                        ? AppThemeData.grey900
+                        ? AppThemeData.grey50
                         : AppThemeData.grey50,
                     fontSize: 18,
                     fontFamily: AppThemeData.medium),
@@ -118,8 +118,8 @@ class ProfileScreen extends StatelessWidget {
                                       ),
                                       RoundedButtonFill(
                                         title: "Edit Profile".tr,
-                                        color: AppThemeData.secondary50,
-                                        textColor: AppThemeData.secondary300,
+                                        color: AppThemeData.new_primary,
+                                        textColor: AppThemeData.grey50,
                                         width: 24,
                                         height: 4,
                                         onPress: () async {

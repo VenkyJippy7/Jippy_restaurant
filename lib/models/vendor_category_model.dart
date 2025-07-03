@@ -4,8 +4,9 @@ class VendorCategoryModel {
   String? description;
   String? id;
   String? title;
+  bool? isActive;
 
-  VendorCategoryModel({this.reviewAttributes, this.photo, this.description, this.id, this.title});
+  VendorCategoryModel({this.reviewAttributes, this.photo, this.description, this.id, this.title, this.isActive});
 
   VendorCategoryModel.fromJson(Map<String, dynamic> json) {
     reviewAttributes = json['review_attributes'] ?? [];
@@ -13,6 +14,7 @@ class VendorCategoryModel {
     description = json['description'] ?? '';
     id = json['id'] ?? "";
     title = json['title'] ?? "";
+    isActive = json['isActive'] ?? true;
   }
 
   Map<String, dynamic> toJson() {
@@ -22,6 +24,7 @@ class VendorCategoryModel {
     data['description'] = description;
     data['id'] = id;
     data['title'] = title;
+    data['isActive'] = isActive;
     return data;
   }
 }

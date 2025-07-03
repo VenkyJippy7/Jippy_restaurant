@@ -56,11 +56,15 @@ class ProductToggles extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-        Transform.scale(
-          scale: 0.7,
-          child: CupertinoSwitch(
-            value: value,
-            onChanged: onChanged,
+        IgnorePointer(
+          ignoring: false,
+          child: Transform.scale(
+            scale: 0.7,
+            child: CupertinoSwitch(
+              value: value,
+              onChanged: onChanged,
+              activeColor: Color(0xFF229954),
+            ),
           ),
         ),
       ],
@@ -85,7 +89,7 @@ class ProductListScreen extends StatelessWidget {
                 "Manage Products".tr,
                 style: TextStyle(
                     color: themeChange.getThem()
-                        ? AppThemeData.grey900
+                        ? AppThemeData.grey50
                         : AppThemeData.grey50,
                     fontSize: 18,
                     fontFamily: AppThemeData.medium),
@@ -394,410 +398,366 @@ class ProductListScreen extends StatelessWidget {
                                   ],
                                 ),
                               )
-                            : Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 10),
-                                child: ListView.builder(
-                                  itemCount: controller.productList.length,
-                                  itemBuilder: (context, index) {
-                                    String price = "0.0";
-                                    String disPrice = "0.0";
-                                    List<String> selectedVariants = [];
-                                    List<String> selectedIndexVariants = [];
-                                    List<String> selectedIndexArray = [];
-                                    if (controller
-                                            .productList[index].itemAttribute !=
-                                        null) {
-                                      if (controller
-                                          .productList[index]
-                                          .itemAttribute!
-                                          .attributes!
-                                          .isNotEmpty) {
-                                        for (var element in controller
-                                            .productList[index]
-                                            .itemAttribute!
-                                            .attributes!) {
-                                          if (element
-                                              .attributeOptions!.isNotEmpty) {
-                                            selectedVariants.add(controller
-                                                .productList[index]
-                                                .itemAttribute!
-                                                .attributes![controller
-                                                    .productList[index]
-                                                    .itemAttribute!
-                                                    .attributes!
-                                                    .indexOf(element)]
-                                                .attributeOptions![0]
-                                                .toString());
-                                            selectedIndexVariants.add(
-                                                '${controller.productList[index].itemAttribute!.attributes!.indexOf(element)} _${controller.productList[index].itemAttribute!.attributes![0].attributeOptions![0].toString()}');
-                                            selectedIndexArray.add(
-                                                '${controller.productList[index].itemAttribute!.attributes!.indexOf(element)}_0');
-                                          }
+                            : Column(
+                                children: [
+                                  // Category selector
+                                  SizedBox(
+                                    height: 48,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: controller.categoryList.length + 1,
+                                      itemBuilder: (context, index) {
+                                        final isAll = index == 0;
+                                        final isSelected = isAll
+                                            ? controller.selectedCategory.value == null
+                                            : controller.selectedCategory.value?.id == controller.categoryList[index - 1].id;
+                                        if (isAll) {
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                                            child: ChoiceChip(
+                                              label: Text('All'),
+                                              selected: isSelected,
+                                              onSelected: (_) {
+                                                controller.selectedCategory.value = null;
+                                              },
+                                              selectedColor: AppThemeData.secondary300,
+                                              backgroundColor: AppThemeData.grey200,
+                                              labelStyle: TextStyle(
+                                                color: isSelected ? Colors.white : AppThemeData.grey900,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          );
                                         }
-                                      }
-                                      if (controller.productList[index]
-                                          .itemAttribute!.variants!
-                                          .where((element) =>
-                                              element.variantSku ==
-                                              selectedVariants.join('-'))
-                                          .isNotEmpty) {
-                                        price = controller.productList[index]
-                                                .itemAttribute!.variants!
-                                                .where((element) =>
-                                                    element.variantSku ==
-                                                    selectedVariants.join('-'))
-                                                .first
-                                                .variantPrice ??
-                                            '0';
-                                        disPrice = '0';
-                                      }
-                                    } else {
-                                      price = controller
-                                          .productList[index].price
-                                          .toString();
-                                      disPrice = controller
-                                          .productList[index].disPrice
-                                          .toString();
-                                    }
-
-                                    bool isDisplayItemAlert = false;
-                                    if ((Constant.isSubscriptionModelApplied ==
-                                            true ||
-                                        Constant.adminCommission?.isEnabled ==
-                                            true)) {
-                                      if (controller.userModel.value
-                                              .subscriptionPlan?.itemLimit ==
-                                          '-1') {
-                                        isDisplayItemAlert = false;
-                                      } else {
-                                        isDisplayItemAlert = (index <
-                                                    int.parse(controller
-                                                            .userModel
-                                                            .value
-                                                            .subscriptionPlan
-                                                            ?.itemLimit ??
-                                                        '0') ==
-                                                true)
-                                            ? false
-                                            : true;
-                                      }
-                                    }
-
-                                    return InkWell(
-                                      onTap: controller.productList[index].isAvailable == false
-                                          ? null
-                                          : () {
-                                        Get.to(const AddProductScreen(),
-                                                arguments: {
-                                              "productModel":
-                                                  controller.productList[index]
-                                            })!
-                                            .then(
-                                          (value) {
-                                            if (value == true) {
-                                              controller.getProduct();
-                                            }
-                                          },
-                                        );
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 5),
-                                        child: Opacity(
-                                          opacity: controller.productList[index].isAvailable == false ? 0.5 : 1.0,
-                                        child: Container(
-                                          decoration: ShapeDecoration(
-                                              color: controller.productList[index].isAvailable == false
-                                                  ? Colors.grey[300]
-                                                  : themeChange.getThem()
-                                                ? AppThemeData.grey900
-                                                : AppThemeData.grey50,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
+                                        final category = controller.categoryList[index - 1];
+                                        final isActive = category.isActive ?? true;
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                                          child: Opacity(
+                                            opacity: isActive ? 1.0 : 0.4,
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                ChoiceChip(
+                                                  label: Text(category.title ?? ''),
+                                                  selected: isSelected,
+                                                  onSelected: isActive
+                                                      ? (_) {
+                                                          controller.selectedCategory.value = category;
+                                                        }
+                                                      : null,
+                                                  selectedColor: AppThemeData.secondary300,
+                                                  backgroundColor: AppThemeData.grey200,
+                                                  labelStyle: TextStyle(
+                                                    color: isSelected ? Colors.white : AppThemeData.grey900,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Switch(
+                                                  value: isActive,
+                                                  onChanged: (_) => controller.toggleCategoryActive(index - 1),
+                                                  activeColor: AppThemeData.secondary300,
+                                                  thumbColor: MaterialStatePropertyAll(Colors.white),
+                                                  trackColor: MaterialStatePropertyAll(Color(0xFFE74C3C)),
+                                                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                ),
+                                              ],
                                             ),
                                           ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: ListView.builder(
+                                      itemCount: controller.filteredProductList.length,
+                                      itemBuilder: (context, index) {
+                                        String price = "0.0";
+                                        String disPrice = "0.0";
+                                        List<String> selectedVariants = [];
+                                        List<String> selectedIndexVariants = [];
+                                        List<String> selectedIndexArray = [];
+                                        if (controller
+                                                .filteredProductList[index].itemAttribute !=
+                                            null) {
+                                          if (controller
+                                              .filteredProductList[index]
+                                              .itemAttribute!
+                                              .attributes!
+                                              .isNotEmpty) {
+                                            for (var element in controller
+                                                .filteredProductList[index]
+                                                .itemAttribute!
+                                                .attributes!) {
+                                              if (element
+                                                  .attributeOptions!.isNotEmpty) {
+                                                selectedVariants.add(controller
+                                                    .filteredProductList[index]
+                                                    .itemAttribute!
+                                                    .attributes![controller
+                                                        .filteredProductList[index]
+                                                        .itemAttribute!
+                                                        .attributes!
+                                                        .indexOf(element)]
+                                                    .attributeOptions![0]
+                                                    .toString());
+                                                selectedIndexVariants.add(
+                                                    '${controller.filteredProductList[index].itemAttribute!.attributes!.indexOf(element)} _${controller.filteredProductList[index].itemAttribute!.attributes![0].attributeOptions![0].toString()}');
+                                                selectedIndexArray.add(
+                                                    '${controller.filteredProductList[index].itemAttribute!.attributes!.indexOf(element)}_0');
+                                              }
+                                            }
+                                          }
+                                          if (controller.filteredProductList[index]
+                                              .itemAttribute!.variants!
+                                              .where((element) =>
+                                                  element.variantSku ==
+                                                  selectedVariants.join('-'))
+                                              .isNotEmpty) {
+                                            price = controller.filteredProductList[index]
+                                                    .itemAttribute!.variants!
+                                                    .where((element) =>
+                                                        element.variantSku ==
+                                                        selectedVariants.join('-'))
+                                                    .first
+                                                    .variantPrice ??
+                                                '0';
+                                            disPrice = '0';
+                                          }
+                                        } else {
+                                          price = controller
+                                              .filteredProductList[index].price
+                                              .toString();
+                                          disPrice = controller
+                                              .filteredProductList[index].disPrice
+                                              .toString();
+                                        }
+
+                                        bool isDisplayItemAlert = false;
+                                        if ((Constant.isSubscriptionModelApplied ==
+                                                true ||
+                                            Constant.adminCommission?.isEnabled ==
+                                                true)) {
+                                          if (controller.userModel.value
+                                                  .subscriptionPlan?.itemLimit ==
+                                              '-1') {
+                                            isDisplayItemAlert = false;
+                                          } else {
+                                            isDisplayItemAlert = (index <
+                                                        int.parse(controller
+                                                                .userModel
+                                                                .value
+                                                                .subscriptionPlan
+                                                                ?.itemLimit ??
+                                                            '0') ==
+                                                    true)
+                                                ? false
+                                                : true;
+                                          }
+                                        }
+
+                                        return InkWell(
+                                          onTap: controller.filteredProductList[index].isAvailable == false
+                                              ? null
+                                              : () {
+                                            Get.to(const AddProductScreen(),
+                                                    arguments: {
+                                                  "productModel":
+                                                      controller.filteredProductList[index]
+                                                })!
+                                                .then(
+                                              (value) {
+                                                if (value == true) {
+                                                  controller.getProduct();
+                                                }
+                                              },
+                                            );
+                                          },
                                           child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    ClipRRect(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 5),
+                                            child: Opacity(
+                                              opacity: controller.filteredProductList[index].isAvailable == false ? 0.5 : 1.0,
+                                              child: Container(
+                                                decoration: ShapeDecoration(
+                                                    color: controller.filteredProductList[index].isAvailable == false
+                                                        ? Colors.grey[300]
+                                                        : themeChange.getThem()
+                                                            ? AppThemeData.grey900
+                                                            : AppThemeData.grey50,
+                                                    shape: RoundedRectangleBorder(
                                                       borderRadius:
-                                                          const BorderRadius
-                                                              .all(
-                                                              Radius.circular(
-                                                                  16)),
-                                                      child: Stack(
-                                                        children: [
-                                                          NetworkImageWidget(
-                                                            imageUrl: controller
-                                                                .productList[
-                                                                    index]
-                                                                .photo
-                                                                .toString(),
-                                                            fit: BoxFit.cover,
-                                                            height: Responsive
-                                                                .height(12,
-                                                                    context),
-                                                            width: Responsive
-                                                                .width(24,
-                                                                    context),
-                                                          ),
-                                                          Container(
-                                                            height: Responsive
-                                                                .height(12,
-                                                                    context),
-                                                            width: Responsive
-                                                                .width(24,
-                                                                    context),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              gradient:
-                                                                  LinearGradient(
-                                                                begin:
-                                                                    const Alignment(
-                                                                        -0.00,
-                                                                        -1.00),
-                                                                end:
-                                                                    const Alignment(
-                                                                        0, 1),
-                                                                colors: [
-                                                                  Colors.black
-                                                                      .withOpacity(
-                                                                          0),
-                                                                  const Color(
-                                                                      0xFF111827)
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
+                                                          BorderRadius.circular(16),
                                                     ),
-                                                    const SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                  ),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
                                                         children: [
-                                                          Text(
-                                                            controller
-                                                                .productList[
-                                                                    index]
-                                                                .name
-                                                                .toString(),
-                                                            style: TextStyle(
-                                                              fontSize: 18,
-                                                              color: themeChange
-                                                                      .getThem()
-                                                                  ? AppThemeData
-                                                                      .grey50
-                                                                  : AppThemeData
-                                                                      .grey900,
-                                                              fontFamily:
-                                                                  AppThemeData
-                                                                      .semiBold,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                            ),
-                                                          ),
-                                                          double.parse(
-                                                                      disPrice) <=
-                                                                  0
-                                                              ? Text(
-                                                                  Constant.amountShow(
-                                                                      amount:
-                                                                          price),
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                    color: themeChange.getThem()
-                                                                        ? AppThemeData
-                                                                            .grey50
-                                                                        : AppThemeData
-                                                                            .grey900,
-                                                                    fontFamily:
-                                                                        AppThemeData
-                                                                            .semiBold,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
+                                                          ClipRRect(
+                                                            borderRadius:
+                                                                const BorderRadius.all(Radius.circular(16)),
+                                                            child: Stack(
+                                                              children: [
+                                                                NetworkImageWidget(
+                                                                  imageUrl: controller.filteredProductList[index].photo.toString(),
+                                                                  fit: BoxFit.cover,
+                                                                  height: Responsive.height(12, context),
+                                                                  width: Responsive.width(24, context),
+                                                                ),
+                                                                Container(
+                                                                  height: Responsive.height(12, context),
+                                                                  width: Responsive.width(24, context),
+                                                                  decoration: BoxDecoration(
+                                                                    gradient: LinearGradient(
+                                                                      begin: const Alignment(-0.00, -1.00),
+                                                                      end: const Alignment(0, 1),
+                                                                      colors: [
+                                                                        Colors.black.withOpacity(0),
+                                                                        const Color(0xFF111827)
+                                                                      ],
+                                                                    ),
                                                                   ),
-                                                                )
-                                                              : Row(
-                                                                  children: [
-                                                                    Text(
-                                                                      Constant.amountShow(
-                                                                          amount:
-                                                                              disPrice),
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            16,
-                                                                        color: themeChange.getThem()
-                                                                            ? AppThemeData.grey50
-                                                                            : AppThemeData.grey900,
-                                                                        fontFamily:
-                                                                            AppThemeData.semiBold,
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          const SizedBox(width: 10),
+                                                          Expanded(
+                                                            child: Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              children: [
+                                                                Text(
+                                                                  controller.filteredProductList[index].name.toString(),
+                                                                  style: TextStyle(
+                                                                    fontSize: 18,
+                                                                    color: themeChange.getThem() ? AppThemeData.grey50 : AppThemeData.grey900,
+                                                                    fontFamily: AppThemeData.semiBold,
+                                                                    fontWeight: FontWeight.w600,
+                                                                  ),
+                                                                ),
+                                                                double.parse(disPrice) <= 0
+                                                                    ? Text(
+                                                                        Constant.amountShow(amount: price),
+                                                                        style: TextStyle(
+                                                                          fontSize: 16,
+                                                                          color: themeChange.getThem() ? AppThemeData.grey50 : AppThemeData.grey900,
+                                                                          fontFamily: AppThemeData.semiBold,
+                                                                          fontWeight: FontWeight.w600,
+                                                                        ),
+                                                                      )
+                                                                    : Row(
+                                                                        children: [
+                                                                          Text(
+                                                                            Constant.amountShow(amount: disPrice),
+                                                                            style: TextStyle(
+                                                                              fontSize: 16,
+                                                                              color: themeChange.getThem() ? AppThemeData.grey50 : AppThemeData.grey900,
+                                                                              fontFamily: AppThemeData.semiBold,
+                                                                              fontWeight: FontWeight.w600,
+                                                                            ),
+                                                                          ),
+                                                                          const SizedBox(width: 5),
+                                                                          Text(
+                                                                            Constant.amountShow(amount: price),
+                                                                            style: TextStyle(
+                                                                              fontSize: 14,
+                                                                              decoration: TextDecoration.lineThrough,
+                                                                              decorationColor: themeChange.getThem() ? AppThemeData.grey500 : AppThemeData.grey400,
+                                                                              color: themeChange.getThem() ? AppThemeData.grey500 : AppThemeData.grey400,
+                                                                              fontFamily: AppThemeData.semiBold,
+                                                                              fontWeight: FontWeight.w600,
+                                                                            ),
+                                                                          ),
+                                                                        ],
                                                                       ),
+                                                                Row(
+                                                                  children: [
+                                                                    SvgPicture.asset(
+                                                                      "assets/icons/ic_star.svg",
+                                                                      colorFilter: const ColorFilter.mode(AppThemeData.warning300, BlendMode.srcIn),
                                                                     ),
-                                                                    const SizedBox(
-                                                                      width: 5,
-                                                                    ),
+                                                                    const SizedBox(width: 5),
                                                                     Text(
-                                                                      Constant.amountShow(
-                                                                          amount:
-                                                                              price),
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            14,
-                                                                        decoration:
-                                                                            TextDecoration.lineThrough,
-                                                                        decorationColor: themeChange.getThem()
-                                                                            ? AppThemeData.grey500
-                                                                            : AppThemeData.grey400,
-                                                                        color: themeChange.getThem()
-                                                                            ? AppThemeData.grey500
-                                                                            : AppThemeData.grey400,
-                                                                        fontFamily:
-                                                                            AppThemeData.semiBold,
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
+                                                                      "${Constant.calculateReview(reviewCount: controller.filteredProductList[index].reviewsCount!.toStringAsFixed(0), reviewSum: controller.filteredProductList[index].reviewsSum.toString())} (${controller.filteredProductList[index].reviewsCount!.toStringAsFixed(0)})",
+                                                                      style: TextStyle(
+                                                                        color: themeChange.getThem() ? AppThemeData.grey50 : AppThemeData.grey900,
+                                                                        fontFamily: AppThemeData.regular,
+                                                                        fontWeight: FontWeight.w500,
                                                                       ),
                                                                     ),
                                                                   ],
                                                                 ),
-                                                          Row(
-                                                            children: [
-                                                              SvgPicture.asset(
-                                                                "assets/icons/ic_star.svg",
-                                                                colorFilter: const ColorFilter
-                                                                    .mode(
-                                                                    AppThemeData
-                                                                        .warning300,
-                                                                    BlendMode
-                                                                        .srcIn),
-                                                              ),
-                                                              const SizedBox(
-                                                                width: 5,
-                                                              ),
-                                                              Text(
-                                                                "${Constant.calculateReview(reviewCount: controller.productList[index].reviewsCount!.toStringAsFixed(0), reviewSum: controller.productList[index].reviewsSum.toString())} (${controller.productList[index].reviewsCount!.toStringAsFixed(0)})",
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: themeChange.getThem()
-                                                                      ? AppThemeData
-                                                                          .grey50
-                                                                      : AppThemeData
-                                                                          .grey900,
-                                                                  fontFamily:
-                                                                      AppThemeData
-                                                                          .regular,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
+                                                                Text(
+                                                                  controller.filteredProductList[index].description.toString(),
+                                                                  maxLines: 1,
+                                                                  style: TextStyle(
+                                                                    fontSize: 12,
+                                                                    color: themeChange.getThem() ? AppThemeData.grey50 : AppThemeData.grey900,
+                                                                    fontFamily: AppThemeData.regular,
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Text(
-                                                            controller
-                                                                .productList[
-                                                                    index]
-                                                                .description
-                                                                .toString(),
-                                                            maxLines: 1,
-                                                            style: TextStyle(
-                                                              fontSize: 12,
-                                                              color: themeChange
-                                                                      .getThem()
-                                                                  ? AppThemeData
-                                                                      .grey50
-                                                                  : AppThemeData
-                                                                      .grey900,
-                                                              fontFamily:
-                                                                  AppThemeData
-                                                                      .regular,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      ),
-                                                      IconButton(
-                                                        icon: Icon(Icons.delete, color: AppThemeData.danger300),
-                                                        onPressed: () {
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (context) => AlertDialog(
-                                                              title: Text('Delete Product?'),
-                                                              content: Text('Are you sure you want to delete this product?'),
-                                                              actions: [
-                                                                TextButton(
-                                                                  onPressed: () => Navigator.of(context).pop(),
-                                                                  child: Text('Cancel'),
-                                                                ),
-                                                                TextButton(
-                                                                  onPressed: () {
-                                                                    Navigator.of(context).pop();
-                                                                    controller.deleteProduct(index);
-                                                                  },
-                                                                  child: Text('Delete', style: TextStyle(color: AppThemeData.danger300)),
-                                                          ),
                                                               ],
                                                             ),
-                                                          );
-                                                              },
+                                                          ),
+                                                          IconButton(
+                                                            icon: Icon(Icons.delete, color: Color(0xFFC0392B)),
+                                                            onPressed: () {
+                                                              showDialog(
+                                                                context: context,
+                                                                builder: (context) => AlertDialog(
+                                                                  title: Text('Delete Product?'),
+                                                                  content: Text('Are you sure you want to delete this product?'),
+                                                                  actions: [
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.of(context).pop(),
+                                                                      child: Text('Cancel'),
+                                                                    ),
+                                                                    TextButton(
+                                                                      onPressed: () {
+                                                                        Navigator.of(context).pop();
+                                                                        controller.deleteProduct(index);
+                                                                      },
+                                                                      child: Text('Delete', style: TextStyle(color: Color(0xFFC0392B))),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              );
+                                                            },
                                                           ),
                                                         ],
                                                       ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  ProductToggles(
-                                                    isPublished: controller.productList[index].publish ?? false,
-                                                    isAvailable: controller.productList[index].isAvailable ?? true,
-                                                    onPublishChanged: (val) => controller.updateList(index, controller.productList[index].publish!),
-                                                    onAvailableChanged: (val) => controller.updateAvailableStatus(index, controller.productList[index].isAvailable ?? true),
-                                                ),
-                                                Visibility(
-                                                  visible: isDisplayItemAlert,
-                                                  child: Text(
-                                                    "This product will not be displayed to customers due to your current subscription limitations."
-                                                        .tr,
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        color:
-                                                            themeChange
-                                                                    .getThem()
-                                                                ? AppThemeData
-                                                                    .danger300
-                                                                : AppThemeData
-                                                                    .danger300,
-                                                        fontSize: 12,
-                                                        fontFamily: AppThemeData
-                                                            .regular),
+                                                      const SizedBox(height: 10),
+                                                      ProductToggles(
+                                                        isPublished: controller.filteredProductList[index].publish ?? false,
+                                                        isAvailable: controller.filteredProductList[index].isAvailable ?? true,
+                                                        onPublishChanged: (val) => controller.updateList(controller.filteredProductList[index].id!, controller.filteredProductList[index].publish!),
+                                                        onAvailableChanged: (val) => controller.updateAvailableStatus(controller.filteredProductList[index].id!, controller.filteredProductList[index].isAvailable ?? true),
+                                                      ),
+                                                      Visibility(
+                                                        visible: isDisplayItemAlert,
+                                                        child: Text(
+                                                          "This product will not be displayed to customers due to your current subscription limitations.".tr,
+                                                          textAlign: TextAlign.center,
+                                                          style: TextStyle(
+                                                            color: themeChange.getThem() ? AppThemeData.danger300 : AppThemeData.danger300,
+                                                            fontSize: 12,
+                                                            fontFamily: AppThemeData.regular),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                              ],
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
           );
         });

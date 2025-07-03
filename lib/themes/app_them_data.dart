@@ -66,6 +66,14 @@ class AppThemeData {
   static const Color successC400 = Color(0xff26B246);
   static const Color goldenrodDark = Color(0xffC723CA);
 
+  // New theme colors
+  static const Color new_primary = Color(0xFFE74C3C);
+  static const Color new_green = Color(0xFF138D75);
+  static const Color new_red = Color(0xFFC0392B);
+  static const Color new_walletbg = Color(0xFFF6DDCC);
+  static const Color new_green_tog = Color(0xFF229954);
+
+
   static const Color driverApp50 = Color(0XFFEFF9EB);
 
   static const String black = 'Urbanist-Black';
