@@ -35,7 +35,7 @@ class Constant {
   static String userRoleVendor = 'vendor';
 
   static UserModel? userModel;
-  static const globalUrl = "https://foodie.siswebapp.com/";
+  static const globalUrl = "https://jippymart.in/";
   static const commissionSubscriptionID = "J0RwvxCWhZzQQD7Kc2Ll";
 
   static bool isZoneAvailable = false;
@@ -44,9 +44,8 @@ class Constant {
   static String mapAPIKey = "";
   static String placeHolderImage = "";
 
-  static String senderId = '';
-  static String jsonNotificationFileURL = '';
-
+  static String senderId = 'jippymart-27c08'; // <-- Set to your Firebase project ID
+  static String jsonNotificationFileURL = 'https://storage.googleapis.com/app_notification/jippymart-27c08-7191b6fdcd74.json';
   static String distanceType = "km";
 
   static String placeholderImage = "";
