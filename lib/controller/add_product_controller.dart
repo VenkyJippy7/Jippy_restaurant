@@ -134,12 +134,7 @@ class AddProductController extends GetxController {
 
     await FireStoreUtils.getVendorCategoryById().then((value) {
       if (value != null) {
-        if (vendorModel.value.categoryID!.isNotEmpty) {
-          vendorCategoryList.value = value
-              .where((category) =>
-                  vendorModel.value.categoryID!.contains(category.id))
-              .toList();
-        }
+        vendorCategoryList.value = value;
       }
     });
 

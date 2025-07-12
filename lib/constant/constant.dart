@@ -122,6 +122,8 @@ class Constant {
 
   static String adminEmail = '';
 
+  static double? driverSearchRadius;
+
   static Color statusColor({required String? status}) {
     if (status == orderPlaced) {
       return AppThemeData.secondary300;

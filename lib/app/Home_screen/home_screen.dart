@@ -32,7 +32,8 @@ import 'package:restaurant/utils/fire_store_utils.dart';
 import 'package:restaurant/utils/network_image_widget.dart';
 import 'package:restaurant/widget/my_separator.dart';
 import 'package:uuid/uuid.dart';
-
+import 'package:geolocator/geolocator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../themes/round_button_fill.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -954,7 +955,8 @@ class HomeScreen extends StatelessWidget {
                             orderModel.status = Constant.orderRejected;
                             await FireStoreUtils.updateOrder(orderModel);
 
-                            if (orderModel.author?.fcmToken != null && orderModel.author!.fcmToken!.isNotEmpty) {
+                            if (orderModel.author?.fcmToken != null &&
+                                orderModel.author!.fcmToken!.isNotEmpty) {
                               SendNotification.sendFcmMessage(
                                 Constant.restaurantRejected,
                                 orderModel.author!.fcmToken.toString(),
@@ -1680,7 +1682,8 @@ class HomeScreen extends StatelessWidget {
                             }
                             await FireStoreUtils.updateOrder(orderModel);
                             // Notify customer on order cancel
-                            if (orderModel.author?.fcmToken != null && orderModel.author!.fcmToken!.isNotEmpty) {
+                            if (orderModel.author?.fcmToken != null &&
+                                orderModel.author!.fcmToken!.isNotEmpty) {
                               SendNotification.sendFcmMessage(
                                 Constant.restaurantCancelled,
                                 orderModel.author!.fcmToken.toString(),
@@ -2806,6 +2809,61 @@ class HomeScreen extends StatelessWidget {
                                 await FireStoreUtils.updateOrder(orderModel);
                                 await FireStoreUtils.restaurantVendorWalletSet(
                                     orderModel);
+
+                                ///this for Driver
+// Broadcast order to drivers within admin-set radius
+                                double radius =
+                                    Constant.driverSearchRadius ?? 5.0;
+                                if (Constant.driverSearchRadius == null) {
+                                  var doc = await FirebaseFirestore.instance
+                                      .collection('settings')
+                                      .doc('DriverNearBy')
+                                      .get();
+                                  if (doc.exists &&
+                                      doc.data() != null &&
+                                      doc.data()!.containsKey('radius')) {
+                                    radius = double.tryParse(
+                                            doc['radius'].toString()) ??
+                                        5.0;
+                                    Constant.driverSearchRadius = radius;
+                                  }
+                                }
+                                final double restaurantLat =
+                                    controller.vendermodel.value.latitude ??
+                                        0.0;
+                                final double restaurantLng =
+                                    controller.vendermodel.value.longitude ??
+                                        0.0;
+                                List<UserModel> allDrivers =
+                                    await FireStoreUtils.getAvalibleDrivers();
+                                List<UserModel> eligibleDrivers =
+                                    allDrivers.where((driver) {
+                                  if (driver.location == null ||
+                                      driver.location!.latitude == null ||
+                                      driver.location!.longitude == null)
+                                    return false;
+                                  final double driverLat =
+                                      driver.location!.latitude!;
+                                  final double driverLng =
+                                      driver.location!.longitude!;
+                                  double distance = Geolocator.distanceBetween(
+                                          restaurantLat,
+                                          restaurantLng,
+                                          driverLat,
+                                          driverLng) /
+                                      1000; // km
+                                  return distance <= radius;
+                                }).toList();
+                                for (var driver in eligibleDrivers) {
+                                  driver.orderRequestData ??= [];
+                                  if (!driver.orderRequestData!
+                                      .contains(orderModel.id)) {
+                                    driver.orderRequestData!.add(orderModel.id);
+                                    await FireStoreUtils.updateDriverUser(
+                                        driver);
+                                  }
+                                }
+
                                 SendNotification.sendFcmMessage(
                                     Constant.restaurantAccepted,
                                     orderModel.author!.fcmToken.toString(), {});
