@@ -11,6 +11,8 @@ import 'package:restaurant/models/cart_product_model.dart';
 import 'package:restaurant/models/order_model.dart';
 import 'package:restaurant/models/tax_model.dart';
 import 'package:restaurant/themes/app_them_data.dart';
+import 'package:restaurant/constant/send_notification.dart';
+import 'package:restaurant/utils/fire_store_utils.dart';
 
 class OrderDetailsController extends GetxController {
   RxBool isLoading = true.obs;
@@ -1032,5 +1034,49 @@ class OrderDetailsController extends GetxController {
     generator.text(' ' * spaceBetweenColumns, styles: const PosStyles());
     bytes += generator.cut();
     return bytes;
+  }
+
+  Future<void> acceptOrder() async {
+    // Update order status in Firestore
+    orderModel.value.status = Constant.orderAccepted;
+    await FireStoreUtils.updateOrder(orderModel.value);
+    // Send notification to customer
+    if (orderModel.value.author?.fcmToken != null && orderModel.value.author!.fcmToken!.isNotEmpty) {
+      await SendNotification.sendFcmMessage(
+        'restaurant_accepted',
+        orderModel.value.author!.fcmToken!,
+        {'orderId': orderModel.value.id, 'status': Constant.orderAccepted},
+      );
+    }
+    // Send notification to driver if needed
+    if (orderModel.value.driver?.fcmToken != null && orderModel.value.driver!.fcmToken!.isNotEmpty) {
+      await SendNotification.sendFcmMessage(
+        'driver_accepted',
+        orderModel.value.driver!.fcmToken!,
+        {'orderId': orderModel.value.id, 'status': Constant.orderAccepted},
+      );
+    }
+  }
+
+  Future<void> rejectOrder() async {
+    // Update order status in Firestore
+    orderModel.value.status = Constant.orderRejected;
+    await FireStoreUtils.updateOrder(orderModel.value);
+    // Send notification to customer
+    if (orderModel.value.author?.fcmToken != null && orderModel.value.author!.fcmToken!.isNotEmpty) {
+      await SendNotification.sendFcmMessage(
+        'restaurant_rejected',
+        orderModel.value.author!.fcmToken!,
+        {'orderId': orderModel.value.id, 'status': Constant.orderRejected},
+      );
+    }
+    // Send notification to driver if needed
+    if (orderModel.value.driver?.fcmToken != null && orderModel.value.driver!.fcmToken!.isNotEmpty) {
+      await SendNotification.sendFcmMessage(
+        'driver_rejected',
+        orderModel.value.driver!.fcmToken!,
+        {'orderId': orderModel.value.id, 'status': Constant.orderRejected},
+      );
+    }
   }
 }

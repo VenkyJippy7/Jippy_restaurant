@@ -141,13 +141,15 @@ class DashBoardScreen extends StatelessWidget {
                           navigationBarItem(
                             themeChange,
                             index: 3,
-                            assetIcon: "assets/icons/ic_wallet.svg",
+
+                            /*assetIcon: "assets/icons/ic_wallet.svg",
                             label: 'Wallet'.tr,
                             controller: controller,
                           ),
                           navigationBarItem(
                             themeChange,
-                            index: 4,
+                            index: 4,*/
+
                             assetIcon: "assets/icons/ic_profile.svg",
                             label: 'Profile'.tr,
                             controller: controller,
@@ -171,6 +173,8 @@ class DashBoardScreen extends StatelessWidget {
                           navigationBarItem(
                             themeChange,
                             index: 2,
+
+                            /*
                             assetIcon: "assets/icons/ic_wallet.svg",
                             label: 'Wallet'.tr,
                             controller: controller,
@@ -178,6 +182,8 @@ class DashBoardScreen extends StatelessWidget {
                           navigationBarItem(
                             themeChange,
                             index: 3,
+
+                             */
                             assetIcon: "assets/icons/ic_profile.svg",
                             label: 'Profile'.tr,
                             controller: controller,

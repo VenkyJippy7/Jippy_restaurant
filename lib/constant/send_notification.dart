@@ -32,14 +32,14 @@ class SendNotification {
 
   static Future<bool> sendFcmMessage(
       String type, String token, Map<String, dynamic>? payload) async {
-    print(type);
+    print('[FCM DEBUG] sendFcmMessage: type=$type, token=$token, payload=$payload');
     try {
       final String accessToken = await getAccessToken();
       debugPrint("accessToken=======>");
       debugPrint(accessToken);
       NotificationModel? notificationModel =
           await FireStoreUtils.getNotificationContent(type);
-
+      print('[FCM DEBUG] NotificationModel: $notificationModel');
       final response = await http.post(
         Uri.parse(
             'https://fcm.googleapis.com/v1/projects/${Constant.senderId}/messages:send'),
@@ -53,19 +53,26 @@ class SendNotification {
               'token': token,
               'notification': {
                 'body': notificationModel!.message ?? '',
-                'title': notificationModel.subject ?? ''
+                'title': notificationModel.subject ?? '',
+              },
+              'android': {
+                'notification': {
+                  'sound': 'order_ringtone.mp3',
+                  'channel_id': 'order_channel',
+                }
               },
               'data': payload,
             }
           },
         ),
       );
-
+      print('[FCM DEBUG] Response status:  [32m${response.statusCode} [0m, body: ${response.body}');
       debugPrint("Notification=======>");
       debugPrint(response.statusCode.toString());
       debugPrint(response.body);
       return true;
     } catch (e) {
+      print('[FCM DEBUG] Error sending notification: $e');
       debugPrint(e.toString());
       return false;
     }
@@ -76,11 +83,11 @@ class SendNotification {
       required String title,
       required String body,
       required Map<String, dynamic> payload}) async {
+    print('[FCM DEBUG] sendOneNotification: token=$token, title=$title, body=$body, payload=$payload');
     try {
       final String accessToken = await getAccessToken();
       debugPrint("accessToken=======>");
       debugPrint(accessToken);
-
       final response = await http.post(
         Uri.parse(
             'https://fcm.googleapis.com/v1/projects/${Constant.senderId}/messages:send'),
@@ -93,17 +100,24 @@ class SendNotification {
             'message': {
               'token': token,
               'notification': {'body': body, 'title': title},
+              'android': {
+                'notification': {
+                  'sound': 'order_ringtone.mp3',
+                  'channel_id': 'order_channel',
+                }
+              },
               'data': payload,
             }
           },
         ),
       );
-
+      print('[FCM DEBUG] Response status:  [32m${response.statusCode} [0m, body: ${response.body}');
       debugPrint("Notification=======>");
       debugPrint(response.statusCode.toString());
       debugPrint(response.body);
       return true;
     } catch (e) {
+      print('[FCM DEBUG] Error sending notification: $e');
       debugPrint(e.toString());
       return false;
     }
@@ -111,6 +125,7 @@ class SendNotification {
 
   static Future<bool> sendChatFcmMessage(String title, String message,
       String token, Map<String, dynamic>? payload) async {
+    print('[FCM DEBUG] sendChatFcmMessage: token=$token, title=$title, message=$message, payload=$payload');
     try {
       final String accessToken = await getAccessToken();
       final response = await http.post(
@@ -125,17 +140,25 @@ class SendNotification {
             'message': {
               'token': token,
               'notification': {'body': message, 'title': title},
+              'android': {
+                'notification': {
+                  'sound': 'order_ringtone.mp3',
+                  'channel_id': 'order_channel',
+                }
+              },
               'data': payload,
             }
           },
         ),
       );
+      print('[FCM DEBUG] Response status:  [32m${response.statusCode} [0m, body: ${response.body}');
       debugPrint("Notification=======>");
       debugPrint(response.statusCode.toString());
       debugPrint(response.body);
       return true;
     } catch (e) {
-      print(e);
+      print('[FCM DEBUG] Error sending notification: $e');
+      debugPrint(e.toString());
       return false;
     }
   }

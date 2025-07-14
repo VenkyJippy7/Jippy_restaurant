@@ -113,7 +113,7 @@ class Constant {
   static bool isEnableAdsFeature = false;
   static bool isSelfDeliveryFeature = false;
 
-  static String orderRingtoneUrl = '';
+  static String orderRingtoneUrl = 'https://firebasestorage.googleapis.com/v0/b/foodies-3c1d9.appspot.com/o/sound.mp3?alt=media&token=5f754cf7-d010-403c-a0b8-909f4bc0f7d5';
   static bool singleOrderReceive = false;
 
   static String scheduleOrderTime = '0';

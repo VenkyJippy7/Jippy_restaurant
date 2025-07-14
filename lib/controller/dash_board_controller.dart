@@ -28,13 +28,13 @@ class DashBoardController extends GetxController {
             const HomeScreen(),
             const DineInOrderScreen(),
             const ProductListScreen(),
-            const WalletScreen(),
+    //  const WalletScreen(),
             const ProfileScreen(),
           ]
         : [
             const HomeScreen(),
             const ProductListScreen(),
-            const WalletScreen(),
+      //const WalletScreen(),
             const ProfileScreen(),
           ];
   }

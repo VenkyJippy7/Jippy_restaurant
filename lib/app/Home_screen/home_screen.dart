@@ -461,10 +461,8 @@ class HomeScreen extends StatelessWidget {
     }
 
     return InkWell(
-      onTap: () async {
-        Get.to(const OrderDetailsScreen(),
-            arguments: {"orderModel": orderModel});
-      },
+      //
+      onTap: () {}, // disables tap on the card
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5),
         child: Container(
@@ -809,34 +807,35 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "Total Amount".tr,
-                        style: TextStyle(
-                          color: themeChange.getThem()
-                              ? AppThemeData.grey300
-                              : AppThemeData.grey600,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: AppThemeData.regular,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      Constant.amountShow(amount: totalAmount.toString()).tr,
-                      style: TextStyle(
-                        color: themeChange.getThem()
-                            ? AppThemeData.grey100
-                            : AppThemeData.grey800,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: AppThemeData.semiBold,
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Expanded(
+                //       child: Text(
+                //         "Total Amount".tr,
+                //         style: TextStyle(
+                //           color: themeChange.getThem()
+                //               ? AppThemeData.grey300
+                //               : AppThemeData.grey600,
+                //           fontSize: 16,
+                //           fontWeight: FontWeight.w400,
+                //           fontFamily: AppThemeData.regular,
+                //         ),
+                //       ),
+                //     ),
+                //     Text(
+                //       Constant.amountShow(amount: totalAmount.toString()).tr,
+                //       style: TextStyle(
+                //         color: themeChange.getThem()
+                //             ? AppThemeData.grey100
+                //             : AppThemeData.grey800,
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.w500,
+                //         fontFamily: AppThemeData.semiBold,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                SizedBox.shrink(),
                 Visibility(
                   visible: Constant.adminCommission?.isEnabled == true,
                   child: Column(
@@ -1210,10 +1209,11 @@ class HomeScreen extends StatelessWidget {
     }
 
     return InkWell(
-      onTap: () async {
-        Get.to(const OrderDetailsScreen(),
-            arguments: {"orderModel": orderModel});
-      },
+      // onTap: () async {
+      //   Get.to(const OrderDetailsScreen(),
+      //       arguments: {"orderModel": orderModel});
+      // },
+      onTap: () {}, // disables tap on the card
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5),
         child: Container(
@@ -1521,34 +1521,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "Total Amount".tr,
-                        style: TextStyle(
-                          color: themeChange.getThem()
-                              ? AppThemeData.grey300
-                              : AppThemeData.grey600,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: AppThemeData.regular,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      Constant.amountShow(amount: totalAmount.toString()).tr,
-                      style: TextStyle(
-                        color: themeChange.getThem()
-                            ? AppThemeData.grey100
-                            : AppThemeData.grey800,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: AppThemeData.semiBold,
-                      ),
-                    ),
-                  ],
-                ),
+                SizedBox.shrink(),
                 Visibility(
                   visible: Constant.adminCommission?.isEnabled == true,
                   child: Column(
@@ -1945,10 +1918,11 @@ class HomeScreen extends StatelessWidget {
     }
 
     return InkWell(
-      onTap: () async {
-        Get.to(const OrderDetailsScreen(),
-            arguments: {"orderModel": orderModel});
-      },
+      // onTap: () async {
+      //   Get.to(const OrderDetailsScreen(),
+      //       arguments: {"orderModel": orderModel});
+      // },
+      onTap: () {}, // disables tap on the card
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5),
         child: Container(
@@ -2256,34 +2230,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "Total Amount".tr,
-                        style: TextStyle(
-                          color: themeChange.getThem()
-                              ? AppThemeData.grey300
-                              : AppThemeData.grey600,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: AppThemeData.regular,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      Constant.amountShow(amount: totalAmount.toString()).tr,
-                      style: TextStyle(
-                        color: themeChange.getThem()
-                            ? AppThemeData.grey100
-                            : AppThemeData.grey800,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: AppThemeData.semiBold,
-                      ),
-                    ),
-                  ],
-                ),
+                SizedBox.shrink(),
                 Visibility(
                   visible: Constant.adminCommission?.isEnabled == true,
                   child: Column(

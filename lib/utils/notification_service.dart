@@ -74,20 +74,23 @@ class NotificationService {
 
   void display(RemoteMessage message) async {
     log('Got a message whilst in the foreground!');
-    log('Message data: ${message.notification!.body.toString()}');
+    log('Message data:  [32m${message.notification!.body.toString()} [0m');
     try {
       AndroidNotificationChannel channel = const AndroidNotificationChannel(
-        '0',
-        'goRide-customer',
-        description: 'Show QuickLAI Notification',
+        'order_channel', // <-- new channel ID
+        'Order Notifications', // <-- new channel name
+        description: 'Channel for order notifications',
         importance: Importance.max,
+        sound: RawResourceAndroidNotificationSound('order_ringtone'), // <-- custom sound
       );
+      await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
       AndroidNotificationDetails notificationDetails =
           AndroidNotificationDetails(channel.id, channel.name,
-              channelDescription: 'your channel Description',
+              channelDescription: channel.description,
               importance: Importance.high,
               priority: Priority.high,
-              ticker: 'ticker');
+              ticker: 'ticker',
+              sound: RawResourceAndroidNotificationSound('order_ringtone'));
       const DarwinNotificationDetails darwinNotificationDetails =
           DarwinNotificationDetails(
               presentAlert: true, presentBadge: true, presentSound: true);
