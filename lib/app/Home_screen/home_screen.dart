@@ -56,18 +56,19 @@ class HomeScreen extends StatelessWidget {
                       title: Row(
                         children: [
                           InkWell(
-                            onTap: () {
-                              DashBoardController dashBoardController =
-                                  Get.find<DashBoardController>();
-                              if (Constant.isDineInEnable &&
-                                  Constant.userModel!.subscriptionPlan?.features
-                                          ?.dineIn !=
-                                      false) {
-                                dashBoardController.selectedIndex.value = 4;
-                              } else {
-                                dashBoardController.selectedIndex.value = 3;
-                              }
-                            },
+                            // onTap:()
+                            // {
+                            //   DashBoardController dashBoardController =
+                            //       Get.find<DashBoardController>();
+                            //   if (Constant.isDineInEnable &&
+                            //       Constant.userModel!.subscriptionPlan?.features
+                            //               ?.dineIn !=
+                            //           false) {
+                            //     dashBoardController.selectedIndex.value = 4;
+                            //   } else {
+                            //     dashBoardController.selectedIndex.value = 3;
+                            //   }
+                            // },
                             child: ClipOval(
                               child: NetworkImageWidget(
                                 imageUrl: controller
@@ -85,14 +86,31 @@ class HomeScreen extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "Welcome to Jippymart Restaurant".tr,
-                                style: TextStyle(
-                                    color: themeChange.getThem()
-                                        ? AppThemeData.grey50
-                                        : AppThemeData.grey50,
-                                    fontSize: 13,
-                                    fontFamily: AppThemeData.bold),
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "Welcome to ".tr,
+                                      style: TextStyle(
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.grey50
+                                            : AppThemeData.grey50,
+                                        fontSize: 13,
+                                        fontFamily: AppThemeData.medium,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: "${controller.vendermodel.value.title ?? 'Restaurant'}",
+                                      style: TextStyle(
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.grey50
+                                            : AppThemeData.grey50,
+                                        fontSize: 18, // Adjustable size for restaurant name
+                                        fontFamily: AppThemeData.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                               Text(
                                 "${controller.userModel.value.fullName()}".tr,
@@ -1798,10 +1816,12 @@ class HomeScreen extends StatelessWidget {
                                 onPress: () async {},
                               ),
                       ),
+                      ///// Chat button option
                       Visibility(
-                        visible: controller.userModel.value.subscriptionPlan
-                                ?.features?.chat !=
-                            false,
+                        visible: false,
+                        // visible: controller.userModel.value.subscriptionPlan
+                        //         ?.features?.chat !=
+                        //     false,
                         child: Row(
                           children: [
                             const SizedBox(

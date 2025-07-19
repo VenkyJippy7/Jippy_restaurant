@@ -176,28 +176,28 @@ class EditProfileScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
-                                onPressed: () => controller.pickFile(
-                                    source: ImageSource.camera),
-                                icon: const Icon(
-                                  Icons.camera_alt,
-                                  size: 32,
-                                )),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 3),
-                              child: Text(
-                                "camera".tr,
-                                style: const TextStyle(),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(18.0),
+                      //   child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.center,
+                      //     children: [
+                      //       IconButton(
+                      //           onPressed: () => controller.pickFile(
+                      //               source: ImageSource.camera),
+                      //           icon: const Icon(
+                      //             Icons.camera_alt,
+                      //             size: 32,
+                      //           )),
+                      //       Padding(
+                      //         padding: const EdgeInsets.only(top: 3),
+                      //         child: Text(
+                      //           "camera".tr,
+                      //           style: const TextStyle(),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.all(18.0),
                         child: Column(
